@@ -1,0 +1,11 @@
+.navbarpictureuser {
+    height: 30px;
+    width: 30px;
+    background: #e5e5e5;
+    border-radius: 100%;
+    border: none;
+  }
+  
+.navbarcustom{
+  box-shadow: 1px 1px 10px rgb(223, 223, 223);
+}

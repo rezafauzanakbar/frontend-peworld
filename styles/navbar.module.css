@@ -1,0 +1,37 @@
+.buttonnavbarmasuk {
+  background: #ffffff;
+  border: 1px solid #5e50a1;
+  border-radius: 4px;
+  color: #5e50a1;
+  margin-right: 10px;
+  height: 35px;
+  width: 80px;
+}
+
+.buttonnavbarmasuk:hover {
+  margin-right: 10px;
+  background: #5e50a1;
+  border-radius: 4px;
+  border: none;
+  color: white;
+  height: 35px;
+  width: 80px;
+}
+
+.buttonnavbardaftar {
+  background: #5e50a1;
+  border-radius: 4px;
+  border: none;
+  color: white;
+  height: 35px;
+  width: 80px;
+}
+
+.buttonnavbardaftar:hover {
+  background: #ffffff;
+  border: 1px solid #5e50a1;
+  border-radius: 4px;
+  color: #5e50a1;
+  height: 35px;
+  width: 80px;
+}

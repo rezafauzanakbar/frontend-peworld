@@ -1,0 +1,49 @@
+.containereditprofile {
+  background-color: #e5e5e5;
+  height: auto;
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+
+.profile {
+  background: #ffffff;
+  border-radius: 8px;
+  height: auto;
+  padding: 20px;
+}
+
+.pictureuser{
+    height: 150px;
+    width: auto;
+    border-radius: 100%;
+    background-color: #e5e5e5;
+}
+
+.containerform {
+  height: auto;
+  padding: 20px;
+  padding-top: 15px !important;
+  background-color: #ffffff;
+  border-radius: 7px;
+}
+
+.buttonhire {
+  background: #5e50a1;
+  border-radius: 4px;
+  height: 50px;
+  color: white;
+  border: none;
+  width: 100%;
+}
+
+
+@media screen and (max-width: 720px) {
+    .containerform {
+        background: #ffffff;
+        margin-top: 40px;
+        height: auto;
+        padding: 20px;
+        padding-top: 20px !important;
+        border-radius: 7px;
+      }
+  }

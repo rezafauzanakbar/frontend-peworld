@@ -1,0 +1,120 @@
+.containertobjobs {
+  background: #5e50a1;
+  height: 60px;
+  border: none;
+}
+
+.nametitle {
+  color: white;
+  padding: 16px;
+  padding-left: 22px;
+}
+
+.containerhome {
+  background: #e5e5e5;
+  height: auto;
+  padding: 30px;
+}
+
+.containersearch {
+  height: 50px;
+  background: #ffffff;
+  box-shadow: 0px 1px 20px rgba(197, 197, 197, 0.25);
+  border-radius: 8px;
+}
+
+.searchhome {
+  height: 50px;
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+.inputsearchhome {
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  width: 100%;
+  padding: 20px;
+}
+
+.categoryhome {
+  border-left: 1px solid #c5c5c5;
+  height: 50px;
+}
+
+
+.containersort {
+  padding: 5px;
+}
+
+.buttonsort {
+  border: none;
+  background-color: #ffffff;
+  width: 130px;
+  height: 40px;
+}
+
+.containerbuttonsearch {
+  padding: 5px;
+}
+
+.buttonsearch {
+  border: none;
+  background: #5e50a1;
+  border-radius: 4px;
+  width: 100px;
+  height: 40px;
+  color: white;
+}
+
+.containermain {
+  height: auto;
+  width: auto;
+  background: #ffffff;
+  box-shadow: 0px 1px 20px rgba(197, 197, 197, 0.25);
+  border-radius: 8px;
+  margin-top: 30px;
+  padding: 30px;
+}
+
+.pictureuser {
+  height: 100px;
+  width: auto;
+  border-radius: 100%;
+}
+
+.ulskill{
+  padding: 0px;
+  list-style: none;
+  text-decoration: none;
+}
+
+.listskilluser {
+  display: inline-flex;
+  width: auto;
+  background: rgba(251, 176, 23, 0.6);
+  border: 1px solid #fbb017;
+  border-radius: 4px;
+  height: 30px;
+  color: white;
+  list-style: none;
+  text-decoration: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 10px;
+}
+
+.buttonviewprofile {
+  border: none;
+  background: #5e50a1;
+  border-radius: 4px;
+  height: 50px;
+  width: 120px;
+  color: white;
+}
+
+@media screen and (max-width: 720px) {
+  .categoryhome {
+    display: none;
+  }
+}

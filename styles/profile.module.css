@@ -1,0 +1,98 @@
+.latarunguprofile {
+  background: #5e50a1;
+  height: 200px;
+}
+.latarwhiteprofile {
+  background: #e5e5e5;
+  height: auto;
+  padding-bottom: 50px;
+}
+
+.profile {
+  background: #ffffff;
+  height: auto;
+  border-radius: 8px;
+  margin-top: -150px;
+  box-shadow: 1px 1px 10px rgb(190, 190, 190);
+  padding: 20px;
+}
+
+.pictureuser {
+  height: 150px;
+  width: 150px;
+  background: #e5e5e5;
+  border-radius: 100%;
+  border: none;
+}
+
+.experienceprofile {
+  background: #ffffff;
+  height: 600px;
+  border-radius: 8px;
+  margin-top: -150px;
+  box-shadow: 1px 1px 10px rgb(190, 190, 190);
+}
+
+.buttonhireprofile {
+  background: #5e50a1;
+  border-radius: 4px;
+  border: none;
+  color: white;
+  height: 50px;
+  width: 100%;
+  border: none;
+}
+
+.skilluserprofile {
+  color: white;
+  background: rgba(251, 176, 23, 0.6);
+  border: 1px solid #fbb017;
+  border-radius: 4px;
+  width: 80px;
+  height: 28px;
+  text-align: center;
+  list-style: none;
+  text-decoration: none;
+  display: inline-block;
+  margin: 5px;
+}
+
+.experienceprofile {
+  padding-top: 20px;
+  height: auto;
+  padding-bottom: 20px;
+}
+
+.card {
+  border: none;
+  border-radius: 5px;
+}
+
+.pictureportofolio {
+  width: auto;
+  border-radius: 5px;
+  height: 150px;
+  padding-bottom: 10px;
+}
+
+.picturepengalamankerja {
+  height: auto;
+  width: 80px;
+}
+
+.picturedatanotfound{
+  width: 200px;
+  height: auto;
+}
+
+@media screen and (max-width: 720px) {
+  .experienceprofile {
+    margin-top: 30px;
+  }
+  .pictureportofolio {
+    width: 320px;
+    border-radius: 5px;
+    height: auto;
+    padding-bottom: 10px;
+  }
+}

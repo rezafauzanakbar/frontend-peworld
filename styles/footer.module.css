@@ -1,0 +1,29 @@
+.footerlandingpage{
+    background: #5E50A1;
+    height: auto;
+    color: white;
+    padding-bottom: 30px;
+}
+
+.logofooter{
+    height: auto;
+    width: 150px;
+}
+
+.linebottomfooter {
+    border: 1px solid #FFFFFF;
+    margin-top: 70px;
+}
+
+.teleponefooter {
+    border: none;
+    color: white;
+    background-color: #5E50A1;
+    margin-right: 50px;
+}
+
+.emailfooter {
+    border: none;
+    color: white;
+    background-color: #5E50A1;
+}

@@ -1,34 +1,107 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1>HireJobs (FE)</h1>
 
-## Getting Started
+## Table of contents
 
-First, run the development server:
+- [Description](#Description)
+- [Built With](#built-with)
+- [Screenshoots](#screenshoots)
+- [Related Project](#related-project)
+- [Contributing](#contributing)
+- [Run Project](#run-project)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Description
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+HireJobs is a job search application, in this application users can log in as recruitment teams and job hunters. As a recruitment team, they will display a list of job hunters and CRUD on their profile page. As a job hunter, you will display your portfolio and work experience and CRUD on your profile. This application was created/developed using Postgresql and Next.js.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Built With
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+This app was built with some technologies below:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- [Node.js](https://nodejs.org/en/)
+- [React.js](https://reactjs.org/)
+- [Bootstrap](https://getbootstrap.com/)
+- [Axios](https://axios-http.com/)
+- [Postgresql](https://www.postgresql.org/)
 
-## Learn More
+## Screenshoots
 
-To learn more about Next.js, take a look at the following resources:
+<details>
+  <summary>
+    Login & Register
+  </summary>
+<img src="./screenshoots/Login.PNG" alt="Login Page" />
+<img src="./screenshoots/Register.png" alt="Login Page" />
+</details>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<details>
+  <summary>
+    Landing Page
+  </summary>
+<img src="./screenshoots/landing page.png" alt="Landing" />
+</details>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<details>
+  <summary>
+   Home Page
+  </summary>
+<img src="./screenshoots/home page.png" alt="Home" />
+</details>
 
-## Deploy on Vercel
+<details>
+  <summary>
+   Profile Pekerja Page
+  </summary>
+<img src="./screenshoots/profile pekerja.png" alt="Profile" />
+<img src="./screenshoots/update profile pekerja.png" alt="Update Profile" />
+</details>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<details>
+  <summary>
+   Hiring Pekerja Page
+  </summary>
+<img src="./screenshoots/hiring pekerja.png" alt="Hiring" />
+</details>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<details>
+  <summary>
+    Profile Perekrut Page
+  </summary>
+<img src="./screenshoots/profile perekrut.png" alt="Profile" />
+<img src="./screenshoots/update profile perekrut.png" alt="Update Profile" />
+</details>
+
+<details>
+  <summary>
+    Hiring Perekrut Page
+  </summary>
+<img src="./screenshoots/Hiring perekrut.png" alt="Hiring" />
+</details>
+
+<details>
+  <summary>
+    Hire Page
+  </summary>
+<img src="./screenshoots/page hire.png" alt="Hire" />
+</details>
+
+## Related Project
+
+RESTful API for this web application, clone this for development HireJobs.\
+
+- [backend-HireJobs](https://github.com/rezafauzanakbar/backend-peworld)
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b your/branch`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/yourbranch`)
+5. Open a Pull Request
+
+## Run Project
+
+Install package : npm i
+
+Run Project : npm start

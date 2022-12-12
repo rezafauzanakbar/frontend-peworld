@@ -3,7 +3,6 @@ import axios from "axios";
 import style from "../../styles/hire.module.css";
 import Navbar from "../../component/navbar_perekrut";
 import Footer from "../../component/footer";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
 

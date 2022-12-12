@@ -69,7 +69,10 @@ export default function Register() {
         }).then(async (confirm) => {
           if (confirm) {
             axios
-              .post(`http://localhost:3001/register/perekrut`, body)
+              .post(
+                `${process.env.NEXT_PUBLIC_API_URL}/register/perekrut`,
+                body
+              )
               .then((res) => {
                 swal({
                   title: "Register",
@@ -99,7 +102,12 @@ export default function Register() {
               <div className={style.bgleftlogin}>
                 <div className="row">
                   <div className="col-auto">
-                    <Image src="/images/logo.png" width={30} height={30} />
+                    <Image
+                      src="/images/logo.png"
+                      alt=""
+                      width={30}
+                      height={30}
+                    />
                   </div>
                   <div className="col-auto">
                     <span className={style.namelogoleftlogin}>Perworld</span>
@@ -139,7 +147,7 @@ export default function Register() {
                         type="text"
                         className="input form-control"
                         id=""
-                        aria-describedby
+                        aria-describedby=""
                         placeholder="Masukan nama panjang"
                         onChange={(e) =>
                           setForm({ ...form, name_perekrut: e.target.value })

@@ -6,6 +6,7 @@ import Footer from "../../../component/footer";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function EditProfile() {
   const router = useRouter();
@@ -46,7 +47,7 @@ export default function EditProfile() {
 
   const getUser = (id) => {
     axios
-      .get(`http://localhost:3001/user/detail/${id}`)
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/user/detail/${id}`)
       .then((res) => {
         console.log(res.data);
         setUser(res.data);
@@ -77,18 +78,20 @@ export default function EditProfile() {
       dangerMode: true,
     }).then(async (confirm) => {
       if (confirm) {
-        axios.put(`http://localhost:3001/user/${id}`, body).then((res) => {
-          swal({
-            title: "Update Profile",
-            text: "Update Successfully!",
-            icon: "success",
-            dangerMode: true,
-          }).then(async (confirm) => {
-            if (confirm) {
-              return router.push("/profile/profile");
-            }
+        axios
+          .put(`${process.env.NEXT_PUBLIC_API_URL}/user/${id}`, body)
+          .then((res) => {
+            swal({
+              title: "Update Profile",
+              text: "Update Successfully!",
+              icon: "success",
+              dangerMode: true,
+            }).then(async (confirm) => {
+              if (confirm) {
+                return router.push("/profile/profile");
+              }
+            });
           });
-        });
       }
     });
   };
@@ -119,7 +122,7 @@ export default function EditProfile() {
     }).then(async (confirm) => {
       if (confirm) {
         axios
-          .post(`http://localhost:3001/experience/insert`, form)
+          .post(`${process.env.NEXT_PUBLIC_API_URL}/experience/insert`, form)
           .then((res) => {
             swal({
               title: "Add Experience",
@@ -157,7 +160,10 @@ export default function EditProfile() {
     }).then(async (confirm) => {
       if (confirm) {
         axios
-          .post(`http://localhost:3001/portofolio/insert`, inputForm)
+          .post(
+            `${process.env.NEXT_PUBLIC_API_URL}/portofolio/insert`,
+            inputForm
+          )
           .then((res) => {
             swal({
               title: "Add Portofolio",
@@ -185,14 +191,16 @@ export default function EditProfile() {
         <div className={style.latarwhiteprofile}>
           <div className="container">
             <div className="row">
-              {user.map((data) => (
-                <div className="col-md-4">
+              {user.map((data, index) => (
+                <div key={index.id_user} className="col-md-4">
                   <div className={style.profile}>
                     <div className="text-center">
-                      <img
+                      <Image
                         className={style.pictureuser}
-                        src={`http://localhost:3001/foto user/${data.photo}`}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
                         alt="profile picture"
+                        width={150}
+                        height={150}
                       />
                     </div>
                     <div>
@@ -250,12 +258,13 @@ export default function EditProfile() {
                         >
                           Nama Lengkap
                         </label>
-                        {user.map((data) => (
+                        {user.map((data, index) => (
                           <input
+                            key={index.id_user}
                             type="text"
                             className="input form-control"
                             id=""
-                            aria-describedby
+                            aria-describedby=""
                             defaultValue={data.name}
                             onChange={(e) =>
                               setUpdate({ ...update, name: e.target.value })
@@ -272,12 +281,13 @@ export default function EditProfile() {
                         >
                           Job desk
                         </label>
-                        {user.map((data) => (
+                        {user.map((data, index) => (
                           <input
+                            key={index.id_user}
                             type="text"
                             className="input form-control"
                             id=""
-                            aria-describedby
+                            aria-describedby=""
                             defaultValue={data.job_desk}
                             onChange={(e) =>
                               setUpdate({ ...update, job_desk: e.target.value })
@@ -294,12 +304,13 @@ export default function EditProfile() {
                         >
                           Domisili
                         </label>
-                        {user.map((data) => (
+                        {user.map((data, index) => (
                           <input
+                            key={index.id_user}
                             type="text"
                             className="input form-control"
                             id=""
-                            aria-describedby
+                            aria-describedby=""
                             defaultValue={data.city}
                             onChange={(e) =>
                               setUpdate({ ...update, city: e.target.value })
@@ -316,12 +327,13 @@ export default function EditProfile() {
                         >
                           Skill
                         </label>
-                        {user.map((data) => (
+                        {user.map((data, index) => (
                           <input
+                            key={index.id_user}
                             type="text"
                             className="input form-control"
                             id=""
-                            aria-describedby
+                            aria-describedby=""
                             defaultValue={data.skill}
                             onChange={(e) =>
                               setUpdate({ ...update, skill: e.target.value })
@@ -339,12 +351,13 @@ export default function EditProfile() {
                         >
                           Github
                         </label>
-                        {user.map((data) => (
+                        {user.map((data, index) => (
                           <input
+                            key={index.id_user}
                             type="text"
                             className="input form-control"
                             id=""
-                            aria-describedby
+                            aria-describedby=""
                             defaultValue={data.github}
                             onChange={(e) =>
                               setUpdate({ ...update, github: e.target.value })
@@ -361,12 +374,13 @@ export default function EditProfile() {
                         >
                           Gitlab
                         </label>
-                        {user.map((data) => (
+                        {user.map((data, index) => (
                           <input
+                            key={index.id_user}
                             type="text"
                             className="input form-control"
                             id=""
-                            aria-describedby
+                            aria-describedby=""
                             defaultValue={data.gitlab}
                             onChange={(e) =>
                               setUpdate({ ...update, gitlab: e.target.value })
@@ -383,12 +397,13 @@ export default function EditProfile() {
                         >
                           Instagram
                         </label>
-                        {user.map((data) => (
+                        {user.map((data, index) => (
                           <input
+                            key={index.id_user}
                             type="text"
                             className="input form-control"
                             id=""
-                            aria-describedby
+                            aria-describedby=""
                             defaultValue={data.instagram}
                             onChange={(e) =>
                               setUpdate({
@@ -408,12 +423,13 @@ export default function EditProfile() {
                         >
                           Deskripsi singkat
                         </label>
-                        {user.map((data) => (
+                        {user.map((data, index) => (
                           <input
+                            key={index.id_user}
                             type="text"
                             className="input form-control"
                             id=""
-                            aria-describedby
+                            aria-describedby=""
                             defaultValue={data.description}
                             onChange={(e) =>
                               setUpdate({
@@ -474,7 +490,7 @@ export default function EditProfile() {
                           type="text"
                           className="input form-control"
                           id=""
-                          aria-describedby
+                          aria-describedby=""
                           placeholder="Web developer"
                           onChange={(e) =>
                             setExperience({
@@ -499,7 +515,7 @@ export default function EditProfile() {
                               type="text"
                               className="input form-control"
                               id=""
-                              aria-describedby
+                              aria-describedby=""
                               placeholder="PT JNE Express"
                               onChange={(e) =>
                                 setExperience({
@@ -524,7 +540,7 @@ export default function EditProfile() {
                               type="date"
                               className="input form-control"
                               id=""
-                              aria-describedby
+                              aria-describedby=""
                               placeholder="DD-MM-YYYY"
                               onChange={(e) =>
                                 setExperience({
@@ -552,7 +568,7 @@ export default function EditProfile() {
                                 type="date"
                                 className="input form-control"
                                 id=""
-                                aria-describedby
+                                aria-describedby=""
                                 placeholder="DD-MM-YYYY"
                                 onChange={(e) =>
                                   setExperience({
@@ -576,7 +592,7 @@ export default function EditProfile() {
                               type="text"
                               className="input form-control"
                               id=""
-                              aria-describedby
+                              aria-describedby=""
                               placeholder="Deskripsikan pekerjaan anda"
                               onChange={(e) =>
                                 setExperience({
@@ -617,7 +633,7 @@ export default function EditProfile() {
                           type="text"
                           className="input form-control"
                           id=""
-                          aria-describedby
+                          aria-describedby=""
                           placeholder="Masukan nama aplikasi"
                           onChange={(e) =>
                             setPortofolio({
@@ -640,7 +656,7 @@ export default function EditProfile() {
                           type="text"
                           className="input form-control"
                           id=""
-                          aria-describedby
+                          aria-describedby=""
                           placeholder="Masukan link repository"
                           onChange={(e) =>
                             setPortofolio({

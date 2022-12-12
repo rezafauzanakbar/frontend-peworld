@@ -6,6 +6,7 @@ import Navbar from "../../component/navbar-login";
 import NavbarPerekrut from "../../component/navbar_perekrut";
 import Footer from "../../component/footer";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   const router = useRouter();
@@ -165,10 +166,12 @@ export default function Home() {
                   <div className="row">
                     <div className="col-md-2">
                       <div className="text-center mt-3">
-                        <img
+                        <Image
                           className={style.pictureuser}
-                          src={`http://localhost:3001/foto user/${data.photo}`}
+                          src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
                           alt=""
+                          width={100}
+                          height={100}
                         />
                       </div>
                     </div>

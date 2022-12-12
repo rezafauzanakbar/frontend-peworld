@@ -16,7 +16,7 @@ export default function ResultHire() {
 
   const getData = (id) => {
     axios
-      .get(`http://localhost:3001/hire/perekrut/${id}`)
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/hire/perekrut/${id}`)
       .then((res) => {
         setHire(res.data.data);
       })
@@ -27,7 +27,7 @@ export default function ResultHire() {
 
   const deleteHire = (id_hire) => {
     axios
-      .delete(`http://localhost:3001/hire/delete/${id_hire}`)
+      .delete(`${process.env.NEXT_PUBLIC_API_URL}/hire/delete/${id_hire}`)
       .then((res) => {
         console.log(res);
         alert("Delete Success");

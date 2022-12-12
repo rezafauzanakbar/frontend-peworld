@@ -6,13 +6,14 @@ import Footer from "../../component/footer";
 import Navbar from "../../component/navbar-login";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
-export default function profile() {
-  const router = useRouter();
-  const [experience, setExperience] = useState([]);
-  const [portofolio, setPortofolio] = useState([]);
-  const [local, setLocal] = useState("");
-  const [profile, setProfile] = useState([]);
+export default function Profile() {
+  const Router = useRouter();
+  const [Experience, setExperience] = useState([]);
+  const [Portofolio, setPortofolio] = useState([]);
+  const [Local, setLocal] = useState("");
+  const [Profile, setProfile] = useState([]);
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("data"));
     const id = data.id_user;
@@ -29,7 +30,7 @@ export default function profile() {
 
   const getByID = (id) => {
     axios
-      .get(`http://localhost:3001/user/detail/${id}`)
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/user/detail/${id}`)
       .then((res) => {
         setProfile(res.data);
       })
@@ -40,7 +41,7 @@ export default function profile() {
 
   const getPortofolio = (id) => {
     axios
-      .get(`http://localhost:3001/portofolio/user/${id}`)
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/portofolio/user/${id}`)
       .then((res) => {
         setPortofolio(res.data.data);
       })
@@ -51,7 +52,7 @@ export default function profile() {
 
   const getExperience = (id) => {
     axios
-      .get(`http://localhost:3001/experience/user/${id}`)
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/experience/user/${id}`)
       .then((res) => {
         console.log(res);
         setExperience(res.data.data);
@@ -70,7 +71,9 @@ export default function profile() {
     }).then(async (confirm) => {
       if (confirm) {
         axios
-          .delete(`http://localhost:3001/experience/delete/${id_experience}`)
+          .delete(
+            `${process.env.NEXT_PUBLIC_API_URL}/experience/delete/${id_experience}`
+          )
           .then((res) => {
             swal({
               title: "Delete Experience",
@@ -79,7 +82,7 @@ export default function profile() {
               dangerMode: true,
             }).then(async (confirm) => {
               if (confirm) {
-                return router.push("/profile/profile");
+                return Router.push("/profile/profile");
               }
             });
           })
@@ -99,7 +102,9 @@ export default function profile() {
     }).then(async (confirm) => {
       if (confirm) {
         axios
-          .delete(`http://localhost:3001/portofolio/delete/${id_portofolio}`)
+          .delete(
+            `${process.env.NEXT_PUBLIC_API_URL}/portofolio/delete/${id_portofolio}`
+          )
           .then((res) => {
             swal({
               title: "Delete Portofolio",
@@ -108,7 +113,7 @@ export default function profile() {
               dangerMode: true,
             }).then(async (confirm) => {
               if (confirm) {
-                return router.push("/profile/profile");
+                return Router.push("/profile/profile");
               }
             });
           })
@@ -150,14 +155,16 @@ export default function profile() {
         <div className={style.latarwhiteprofile}>
           <div className="container">
             <div className="row">
-              {profile.map((data, index) => (
-                <div className="col-md-4">
+              {Profile.map((data, index) => (
+                <div key={index.id_user} className="col-md-4">
                   <div className={style.profile}>
                     <div className="text-center">
-                      <img
+                      <Image
                         className={style.pictureuser}
-                        src={`http://localhost:3001/foto user/${data.photo}`}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
                         alt="profile picture"
+                        width={150}
+                        height={150}
                       />
                     </div>
                     <div className="mt-3 text-center">
@@ -194,7 +201,7 @@ export default function profile() {
                     <div className="mt-4">
                       {data.description == null ? (
                         <span className="text-secondary">
-                          Hello, nice to meet you. I'am Programmer profesional!
+                          Hello, nice to meet you. Iam Programmer profesional!
                         </span>
                       ) : (
                         <span className="text-secondary">
@@ -202,7 +209,7 @@ export default function profile() {
                         </span>
                       )}
                     </div>
-                    {local.level == 1 ? (
+                    {Local.level == 1 ? (
                       <Link href="/hire/hire">
                         <div className="text-center mt-4">
                           <button className={style.buttonhireprofile}>
@@ -241,7 +248,12 @@ export default function profile() {
                       <div>
                         <div className="row mt-3">
                           <div className="col-md-2">
-                            <img src="/images/mail (4).png" />
+                            <Image
+                              src="/images/mail (4).png"
+                              alt=""
+                              width={30}
+                              height={30}
+                            />
                           </div>
                           <div className="col-md-10">
                             <span className="text-secondary">{data.email}</span>
@@ -251,7 +263,12 @@ export default function profile() {
                       <div>
                         <div className="row mt-3">
                           <div className="col-md-2">
-                            <img src="/images/instagram.png" />
+                            <Image
+                              src="/images/instagram.png"
+                              alt=""
+                              width={30}
+                              height={30}
+                            />
                           </div>
                           <div className="col-md-10">
                             {data.instagram == null ? (
@@ -269,7 +286,12 @@ export default function profile() {
                       <div>
                         <div className="row mt-3">
                           <div className="col-md-2">
-                            <img src="/images/github.png" />
+                            <Image
+                              src="/images/github.png"
+                              alt=""
+                              width={30}
+                              height={30}
+                            />
                           </div>
                           <div className="col-md-10">
                             {data.github == null ? (
@@ -287,7 +309,12 @@ export default function profile() {
                       <div>
                         <div className="row mt-3">
                           <div className="col-md-2">
-                            <img src="/images/gitlab.png" />
+                            <Image
+                              src="/images/gitlab.png"
+                              alt=""
+                              width={30}
+                              height={30}
+                            />
                           </div>
                           <div className="col-md-10">
                             {data.gitlab == null ? (
@@ -340,23 +367,32 @@ export default function profile() {
                         <div className={style.portofolioprofile}>
                           <div className="container">
                             <div className="row">
-                              {portofolio == "" ? (
+                              {Portofolio == "" ? (
                                 <div className="text-center">
-                                  <img
+                                  <Image
                                     className={style.picturedatanotfound}
                                     src="/images/data not found.webp"
+                                    alt=""
+                                    width={200}
+                                    height={200}
                                   />
                                   <span className="text-secondary">
-                                    Sorry, you don't have portofolio!
+                                    Sorry, you dont have portofolio!
                                   </span>
                                 </div>
                               ) : (
-                                portofolio.map((data) => (
-                                  <div className="col-md-4 mb-3">
+                                Portofolio.map((data, index) => (
+                                  <div
+                                    key={index.id_portofolio}
+                                    className="col-md-4 mb-3"
+                                  >
                                     <div className={style.card}>
-                                      <img
+                                      <Image
                                         className={style.pictureportofolio}
-                                        src={`http://localhost:3001/image portofolio/${data.image}`}
+                                        src={`${process.env.NEXT_PUBLIC_API_URL}/image portofolio/${data.image}`}
+                                        alt=""
+                                        height={150}
+                                        width={150}
                                       />
                                       <div className="card-body text-center">
                                         <p>{data.title_portofolio}</p>
@@ -388,24 +424,30 @@ export default function profile() {
                         className="collapse multi-collapse show"
                         id="pengalamakerja"
                       >
-                        {experience == "" ? (
+                        {Experience == "" ? (
                           <div className="text-center">
-                            <img
+                            <Image
                               className={style.picturedatanotfound}
                               src="/images/data not found.webp"
+                              alt=""
+                              width={200}
+                              height={200}
                             />
                             <span className="text-secondary">
-                              Sorry, you don't have experience!
+                              Sorry, you dont have experience!
                             </span>
                           </div>
                         ) : (
-                          experience.map((data) => (
-                            <div className="mt-3">
+                          Experience.map((data, index) => (
+                            <div key={index.id_experience} className="mt-3">
                               <div className="row">
                                 <div className="col-md-2 text-center">
-                                  <img
+                                  <Image
                                     className={style.picturepengalamankerja}
                                     src="/images/Rectangle 672.png"
+                                    alt=""
+                                    width={80}
+                                    height={80}
                                   />
                                 </div>
                                 <div className="col-md-10">

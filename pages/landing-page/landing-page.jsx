@@ -3,6 +3,7 @@ import style from "../../styles/landing-page.module.css";
 import Navbar from "../../component/navbar";
 import Image from "next/image";
 import Footer from "../../component/footer";
+
 export default function landingpage() {
   return (
     <section>
@@ -31,9 +32,12 @@ export default function landingpage() {
           </div>
           <div className="col-md-6 text-center">
             <div>
-              <img
+              <Image
                 className={style.pictureonelandingpage}
                 src="/images/Group 1195.png"
+                alt=""
+                width={500}
+                height={500}
               />
             </div>
           </div>
@@ -41,9 +45,12 @@ export default function landingpage() {
         <div className="row mt-5">
           <div className="col-md-6">
             <div>
-              <img
+              <Image
                 className={style.picturetwolandingpage}
                 src="/images/Group 1194.png"
+                alt=""
+                width={470}
+                height={470}
               />
             </div>
           </div>
@@ -204,9 +211,12 @@ export default function landingpage() {
           </div>
           <div className="col-md-6">
             <div>
-              <img
+              <Image
                 className={style.picturethereelandingpage}
                 src="/images/Group 1196.png"
+                alt=""
+                width={470}
+                height={470}
               />
             </div>
           </div>
@@ -223,9 +233,12 @@ export default function landingpage() {
                 <div className="col-md-4 mt-3">
                   <div className={style.card}>
                     <div className="text-center">
-                      <img
+                      <Image
                         className={style.pictureopinion}
                         src="/images/Ellipse 320.png"
+                        alt=""
+                        width={100}
+                        height={100}
                       />
                     </div>
                     <div className="card-body text-center">
@@ -248,9 +261,12 @@ export default function landingpage() {
                 <div className="col-md-4 mt-3">
                   <div className={style.card}>
                     <div className="text-center">
-                      <img
+                      <Image
                         className={style.pictureopinion}
                         src="/images/Ellipse 323.png"
+                        alt=""
+                        width={100}
+                        height={100}
                       />
                     </div>
                     <div className="card-body text-center">
@@ -273,9 +289,12 @@ export default function landingpage() {
                 <div className="col-md-4 mt-3">
                   <div className={style.card}>
                     <div className="text-center">
-                      <img
+                      <Image
                         className={style.pictureopinion}
                         src="/images/Ellipse 325.png"
+                        alt=""
+                        width={100}
+                        height={100}
                       />
                     </div>
                     <div className="card-body text-center">

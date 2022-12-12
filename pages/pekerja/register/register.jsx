@@ -62,7 +62,7 @@ export default function Register() {
         }).then(async (confirm) => {
           if (confirm) {
             axios
-              .post(`http://localhost:3001/register`, body)
+              .post(`${process.env.NEXT_PUBLIC_API_URL}/register`, body)
               .then((res) => {
                 swal({
                   title: "Register",
@@ -93,7 +93,12 @@ export default function Register() {
                 <div className="row">
                   <div className="col-auto">
                     <Link href="/landing-page/landing-page">
-                      <Image src="/images/logo.png" width={30} height={30} />
+                      <Image
+                        src="/images/logo.png"
+                        alt=""
+                        width={30}
+                        height={30}
+                      />
                     </Link>
                   </div>
                   <div className="col-auto">
@@ -134,7 +139,7 @@ export default function Register() {
                         type="text"
                         className="input form-control"
                         id=""
-                        aria-describedby
+                        aria-describedby=""
                         placeholder="Masukan nama panjang"
                         onChange={(e) =>
                           setForm({ ...form, name: e.target.value })

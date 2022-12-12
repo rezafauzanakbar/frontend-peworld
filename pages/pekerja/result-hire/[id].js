@@ -12,7 +12,7 @@ export async function getServerSideProps(context) {
   try {
     const response = await axios({
       method: "GET",
-      url: `http://localhost:3001/hire/user/${id}`,
+      url: `${process.env.NEXT_PUBLIC_API_URL}/hire/user/${id}`,
     });
     return {
       props: {

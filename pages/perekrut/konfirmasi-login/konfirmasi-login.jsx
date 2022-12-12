@@ -14,7 +14,12 @@ export default function KonfirmasiLogin() {
                 <div className={style.bgleftlogin}>
                   <div className="row">
                     <div className="col-auto">
-                      <Image src="/images/logo.png" width={30} height={30} />
+                      <Image
+                        src="/images/logo.png"
+                        alt=""
+                        width={30}
+                        height={30}
+                      />
                     </div>
                     <div className="col-auto">
                       <span className={style.namelogoleftlogin}>Perworld</span>
@@ -52,7 +57,7 @@ export default function KonfirmasiLogin() {
                           type="email"
                           className="input form-control"
                           id=""
-                          aria-describedby
+                          aria-describedby=""
                           placeholder="Masukan alamat email"
                         />
                       </div>
@@ -69,7 +74,7 @@ export default function KonfirmasiLogin() {
                           type="password"
                           className="input form-control"
                           id=""
-                          aria-describedby
+                          aria-describedby=""
                           placeholder="Masukan kata sandi"
                         />
                       </div>

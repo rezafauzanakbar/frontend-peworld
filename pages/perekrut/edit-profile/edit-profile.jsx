@@ -5,6 +5,7 @@ import Footer from "../../../component/footer";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function EditProfile() {
   const router = useRouter();
@@ -29,7 +30,7 @@ export default function EditProfile() {
 
   const getUser = (id) => {
     axios
-      .get(`http://localhost:3001/perekrut/detail/${id}`)
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/perekrut/detail/${id}`)
       .then((res) => {
         console.log(res.data.rows);
         setUser(res.data.rows);
@@ -55,7 +56,7 @@ export default function EditProfile() {
       lingkedin: update.linkedin,
     };
     axios
-      .put(`http://localhost:3001/perekrut/update/${id}`, body)
+      .put(`${process.env.NEXT_PUBLIC_API_URL}/perekrut/update/${id}`, body)
       .then((res) => {
         console.log(res.data);
         alert("Update Success");
@@ -75,13 +76,15 @@ export default function EditProfile() {
           <div className="container">
             <div className="row">
               <div className="col-md-4">
-                {user.map((data) => (
-                  <div className={style.profile}>
+                {user.map((data, index) => (
+                  <div key={index.id_perekrut} className={style.profile}>
                     <div className="text-center">
-                      <img
+                      <Image
                         className={style.pictureuser}
-                        src={`http://localhost:3001/foto user/${data.photo}`}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
                         alt=""
+                        width={150}
+                        height={150}
                       />
                     </div>
                     <div className="mt-3">
@@ -113,8 +116,11 @@ export default function EditProfile() {
                 </div>
               </div>
               <div className="col-md-8">
-                {user.map((data) => (
-                  <div className={style.containereditprofile}>
+                {user.map((data, index) => (
+                  <div
+                    key={index.id_perekrut}
+                    className={style.containereditprofile}
+                  >
                     <div className={style.title}>
                       <h5>Data Diri</h5>
                       <hr />
@@ -133,7 +139,7 @@ export default function EditProfile() {
                             className="input form-control"
                             id=""
                             defaultValue={data.perusahaan}
-                            aria-describedby
+                            aria-describedby=""
                             onChange={(e) =>
                               setUpdate({
                                 ...update,
@@ -156,7 +162,7 @@ export default function EditProfile() {
                             className="input form-control"
                             id=""
                             defaultValue={data.jabatan}
-                            aria-describedby
+                            aria-describedby=""
                             onChange={(e) =>
                               setUpdate({
                                 ...update,
@@ -179,7 +185,7 @@ export default function EditProfile() {
                             className="input form-control"
                             id=""
                             defaultValue={data.address}
-                            aria-describedby
+                            aria-describedby=""
                             onChange={(e) =>
                               setUpdate({
                                 ...update,
@@ -206,7 +212,7 @@ export default function EditProfile() {
                                 ? "Masukan detail anda"
                                 : data.description
                             }
-                            aria-describedby
+                            aria-describedby=""
                             onChange={(e) =>
                               setUpdate({
                                 ...update,
@@ -229,7 +235,7 @@ export default function EditProfile() {
                             className="input form-control"
                             id=""
                             defaultValue={data.email}
-                            aria-describedby
+                            aria-describedby=""
                             onChange={(e) =>
                               setUpdate({
                                 ...update,
@@ -252,7 +258,7 @@ export default function EditProfile() {
                             className="input form-control"
                             id=""
                             defaultValue={data.instagram}
-                            aria-describedby
+                            aria-describedby=""
                             onChange={(e) =>
                               setUpdate({
                                 ...update,
@@ -275,7 +281,7 @@ export default function EditProfile() {
                             className="input form-control"
                             id=""
                             defaultValue={data.phone}
-                            aria-describedby
+                            aria-describedby=""
                             onChange={(e) =>
                               setUpdate({
                                 ...update,
@@ -302,7 +308,7 @@ export default function EditProfile() {
                                 ? "Masukkan link lingkedin"
                                 : data.linkedin
                             }
-                            aria-describedby
+                            aria-describedby=""
                             onChange={(e) =>
                               setUpdate({
                                 ...update,

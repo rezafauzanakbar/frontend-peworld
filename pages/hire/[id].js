@@ -5,13 +5,14 @@ import Navbar from "../../component/navbar_perekrut";
 import Footer from "../../component/footer";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export async function getStaticProps(context) {
   const { id } = context.params;
   try {
     const response = await axios({
       method: "GET",
-      url: `http://localhost:3001/user/detail/${id}`,
+      url: `${process.env.NEXT_PUBLIC_API_URL}/user/detail/${id}`,
     });
     return {
       props: {
@@ -34,7 +35,7 @@ export async function getStaticProps(context) {
 export async function getStaticPaths() {
   const response = await axios({
     method: "GET",
-    url: `http://localhost:3001/user/all`,
+    url: `${process.env.NEXT_PUBLIC_API_URL}/user/all`,
   });
   const paths = response.data.rows.map((item) => {
     return { params: { id: item.id_user.toString() } };
@@ -62,7 +63,7 @@ const Detail = (props) => {
   useEffect(() => {
     getUser();
     getPerekrut();
-  }, []);
+  });
 
   const getUser = () => {
     const data = props.data.map((data) => data.id_user);
@@ -87,7 +88,7 @@ const Detail = (props) => {
       name: form.name,
     };
     axios
-      .post(`http://localhost:3001/hire/insert`, body)
+      .post(`${process.env.NEXT_PUBLIC_API_URL}/hire/insert`, body)
       .then((res) => {
         console.log(res.data);
         alert("Hire Successfully");
@@ -108,10 +109,12 @@ const Detail = (props) => {
               {props.data.map((data, index) => (
                 <div key={index} className={style.profile}>
                   <div className="text-center">
-                    <img
+                    <Image
                       className={style.pictureuser}
-                      src={`http://localhost:3001/foto user/${data.photo}`}
+                      src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
                       alt=""
+                      width={150}
+                      height={150}
                     />
                   </div>
                   <div className="mt-3">

@@ -7,13 +7,14 @@ import Navbar from "../../component/navbar-login";
 import NavbarPerekrut from "../../component/navbar_perekrut";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export async function getStaticProps(context) {
   const { id } = context.params;
   try {
     const response = await axios({
       method: "GET",
-      url: `http://localhost:3001/user/detail/${id}`,
+      url: `${process.env.NEXT_PUBLIC_API_URL}/user/detail/${id}`,
     });
     return {
       props: {
@@ -36,7 +37,7 @@ export async function getStaticProps(context) {
 export async function getStaticPaths() {
   const response = await axios({
     method: "GET",
-    url: `http://localhost:3001/user/all`,
+    url: `${process.env.NEXT_PUBLIC_API_URL}/user/all`,
   });
   const paths = response.data.rows.map((item) => {
     return { params: { id: item.id_user.toString() } };
@@ -47,7 +48,7 @@ export async function getStaticPaths() {
   };
 }
 
-export default function detail(props) {
+export default function Detail(props) {
   const router = useRouter();
   const [experience, setExperience] = useState([]);
   const [portofolio, setPortofolio] = useState([]);
@@ -58,7 +59,7 @@ export default function detail(props) {
     getDataLocal();
     getPortofolio();
     getExperience();
-  }, []);
+  });
 
   const getDataLocal = () => {
     const data = JSON.parse(localStorage.getItem("data"));
@@ -69,7 +70,7 @@ export default function detail(props) {
     const data = props.data.map((data) => data.id_user);
     const id = data[0];
     axios
-      .get(`http://localhost:3001/portofolio/user/${id}`)
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/portofolio/user/${id}`)
       .then((res) => {
         setPortofolio(res.data.data);
       })
@@ -82,7 +83,7 @@ export default function detail(props) {
     const data = props.data.map((data) => data.id_user);
     const id = data[0];
     axios
-      .get(`http://localhost:3001/experience/user/${id}`)
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/experience/user/${id}`)
       .then((res) => {
         console.log(res);
         setExperience(res.data.data);
@@ -124,13 +125,15 @@ export default function detail(props) {
           <div className="container">
             <div className="row">
               {props.data.map((data, index) => (
-                <div className="col-md-4">
+                <div key={index.id_user} className="col-md-4">
                   <div className={style.profile}>
                     <div className="text-center">
-                      <img
+                      <Image
                         className={style.pictureuser}
-                        src={`http://localhost:3001/foto user/${data.photo}`}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
                         alt="profile picture"
+                        width={150}
+                        height={150}
                       />
                     </div>
                     <div className="mt-3 text-center">
@@ -171,7 +174,7 @@ export default function detail(props) {
                     <div className="mt-4">
                       {data.description == null ? (
                         <span className="text-secondary">
-                          Hello, nice to meet you. I'am Programmer profesional!
+                          Hello, nice to meet you. Iam Programmer profesional!
                         </span>
                       ) : (
                         <span className="text-secondary">
@@ -221,7 +224,12 @@ export default function detail(props) {
                       <div>
                         <div className="row mt-3">
                           <div className="col-md-2">
-                            <img src="/images/mail (4).png" />
+                            <Image
+                              src="/images/mail (4).png"
+                              alt=""
+                              width={30}
+                              height={30}
+                            />
                           </div>
                           <div className="col-md-10">
                             <span className="text-secondary">{data.email}</span>
@@ -231,7 +239,12 @@ export default function detail(props) {
                       <div>
                         <div className="row mt-3">
                           <div className="col-md-2">
-                            <img src="/images/instagram.png" />
+                            <Image
+                              src="/images/instagram.png"
+                              width={30}
+                              height={30}
+                              alt=""
+                            />
                           </div>
                           <div className="col-md-10">
                             {data.instagram == null ? (
@@ -249,7 +262,12 @@ export default function detail(props) {
                       <div>
                         <div className="row mt-3">
                           <div className="col-md-2">
-                            <img src="/images/github.png" />
+                            <Image
+                              src="/images/github.png"
+                              alt=""
+                              width={30}
+                              height={30}
+                            />
                           </div>
                           <div className="col-md-10">
                             {data.github == null ? (
@@ -267,7 +285,12 @@ export default function detail(props) {
                       <div>
                         <div className="row mt-3">
                           <div className="col-md-2">
-                            <img src="/images/gitlab.png" />
+                            <Image
+                              src="/images/gitlab.png"
+                              alt=""
+                              width={30}
+                              height={30}
+                            />
                           </div>
                           <div className="col-md-10">
                             {data.gitlab == null ? (
@@ -322,21 +345,30 @@ export default function detail(props) {
                             <div className="row">
                               {portofolio == "" ? (
                                 <div className="text-center">
-                                  <img
+                                  <Image
                                     className={style.picturedatanotfound}
                                     src="/images/data not found.webp"
+                                    alt=""
+                                    width={200}
+                                    height={200}
                                   />
                                   <span className="text-secondary">
-                                    Sorry, you don't have portofolio!
+                                    Sorry, you dont have portofolio!
                                   </span>
                                 </div>
                               ) : (
-                                portofolio.map((data) => (
-                                  <div className="col-md-4 mb-3">
+                                portofolio.map((data, index) => (
+                                  <div
+                                    key={index.id_portofolio}
+                                    className="col-md-4 mb-3"
+                                  >
                                     <div className={style.card}>
-                                      <img
+                                      <Image
                                         className={style.pictureportofolio}
-                                        src={`http://localhost:3001/image portofolio/${data.image}`}
+                                        src={`${process.env.NEXT_PUBLIC_API_URL}/image portofolio/${data.image}`}
+                                        alt=""
+                                        width={320}
+                                        height={320}
                                       />
                                       <div className="card-body text-center">
                                         <p>{data.title_portofolio}</p>
@@ -355,22 +387,28 @@ export default function detail(props) {
                       >
                         {experience == "" ? (
                           <div className="text-center">
-                            <img
+                            <Image
                               className={style.picturedatanotfound}
                               src="/images/data not found.webp"
+                              alt=""
+                              width={200}
+                              height={200}
                             />
                             <span className="text-secondary">
-                              Sorry, you don't have experience!
+                              Sorry, you dont have experience!
                             </span>
                           </div>
                         ) : (
-                          experience.map((data) => (
-                            <div className="mt-3">
+                          experience.map((data, index) => (
+                            <div key={index.id_experience} className="mt-3">
                               <div className="row">
                                 <div className="col-md-2 text-center">
-                                  <img
+                                  <Image
                                     className={style.picturepengalamankerja}
                                     src="/images/Rectangle 672.png"
+                                    alt=""
+                                    width={80}
+                                    height={80}
                                   />
                                 </div>
                                 <div className="col-md-10">

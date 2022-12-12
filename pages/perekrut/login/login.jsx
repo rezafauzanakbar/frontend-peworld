@@ -17,7 +17,7 @@ export default function Login() {
     e.preventDefault();
     console.log(form);
     axios
-      .post(`http://localhost:3001/login/perekrut`, form)
+      .post(`${process.env.NEXT_PUBLIC_API_URL}/login/perekrut`, form)
       .then((res) => {
         swal({
           title: "Login",
@@ -46,7 +46,12 @@ export default function Login() {
                 <div className={style.bgleftlogin}>
                   <div className="row">
                     <div className="col-auto">
-                      <Image src="/images/logo.png" width={30} height={30} />
+                      <Image
+                        src="/images/logo.png"
+                        alt=""
+                        width={30}
+                        height={30}
+                      />
                     </div>
                     <div className="col-auto">
                       <span className={style.namelogoleftlogin}>Perworld</span>
@@ -87,7 +92,7 @@ export default function Login() {
                           type="email"
                           className="input form-control"
                           id=""
-                          aria-describedby
+                          aria-describedby=""
                           placeholder="Masukan alamat email"
                           onChange={(e) =>
                             setForm({ ...form, email: e.target.value })

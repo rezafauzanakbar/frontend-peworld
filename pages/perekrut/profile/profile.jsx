@@ -6,10 +6,11 @@ import Footer from "../../../component/footer";
 import Navbar from "../../../component/navbar_perekrut";
 import Link from "next/link";
 import style from "../../../styles/profile-perekrut.module.css";
+import Image from "next/image";
 
-export default function profile() {
-  const router = useRouter();
-  const [user, setUser] = useState([]);
+export default function Profile() {
+  const Router = useRouter();
+  const [User, setUser] = useState([]);
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("data"));
     const id = data.id_perekrut;
@@ -18,7 +19,7 @@ export default function profile() {
 
   const getUser = (id) => {
     axios
-      .get(`http://localhost:3001/perekrut/detail/${id}`)
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/perekrut/detail/${id}`)
       .then((res) => {
         console.log(res.data.rows);
         setUser(res.data.rows);
@@ -44,7 +45,7 @@ export default function profile() {
           dangerMode: true,
         }).then(async (confirm) => {
           if (confirm) {
-            return router.push("/before-login/before-login");
+            return Router.push("/before-login/before-login");
           }
         });
       }
@@ -57,13 +58,15 @@ export default function profile() {
         <div className={style.latarunguprofile}></div>
         <div className={`text-center ${style.latarwhiteprofile}`}>
           <div className="container">
-            {user.map((data) => (
-              <div className={style.containerprofile}>
+            {User.map((data, index) => (
+              <div key={index.id_perekrut} className={style.containerprofile}>
                 <div className="text-center">
-                  <img
+                  <Image
                     className={style.profilepicture}
-                    src={`http://localhost:3001/foto user/${data.photo}`}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
                     alt=""
+                    width={150}
+                    height={150}
                   />
                 </div>
                 <div className="mt-3">
@@ -94,7 +97,12 @@ export default function profile() {
                   <div>
                     <div className="mt-3">
                       <div className="col-auto">
-                        <img src="/images/mail (4).png" />
+                        <Image
+                          src="/images/mail (4).png"
+                          alt=""
+                          height={30}
+                          width={30}
+                        />
                       </div>
                       <div className="col-auto">
                         <span className="text-secondary">{data.email}</span>
@@ -104,7 +112,12 @@ export default function profile() {
                   <div>
                     <div className="mt-3">
                       <div className="col-auto">
-                        <img src="/images/instagram.png" />
+                        <Image
+                          src="/images/instagram.png"
+                          alt=""
+                          height={30}
+                          width={30}
+                        />
                       </div>
                       <div className="col-auto">
                         {data.instagram == null ? (
@@ -122,7 +135,12 @@ export default function profile() {
                   <div>
                     <div className="mt-3">
                       <div className="col-auto">
-                        <img src="/images/Vector (1).png" />
+                        <Image
+                          src="/images/Vector (1).png"
+                          alt=""
+                          height={30}
+                          width={30}
+                        />
                       </div>
                       <div className="col-auto">
                         <span className="text-secondary">{data.phone}</span>
@@ -132,7 +150,12 @@ export default function profile() {
                   <div>
                     <div className="mt-3">
                       <div className="col-auto">
-                        <img src="/images/linkedin 1.png" />
+                        <Image
+                          src="/images/linkedin 1.png"
+                          alt=""
+                          height={30}
+                          width={30}
+                        />
                       </div>
                       <div className="col-auto">
                         {data.linkedin == null ? (

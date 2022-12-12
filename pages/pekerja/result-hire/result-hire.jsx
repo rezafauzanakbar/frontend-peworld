@@ -16,7 +16,7 @@ export default function ResultHire() {
 
   const getData = (id) => {
     axios
-      .get(`http://localhost:3001/hire/user/${id}`)
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/hire/user/${id}`)
       .then((res) => {
         setHire(res.data.data);
       })

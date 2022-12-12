@@ -2,6 +2,7 @@ import React from "react";
 import style from "../../styles/hire.module.css";
 import Navbar from "../../component/navbar_perekrut";
 import Footer from "../../component/footer";
+import Image from "next/image";
 
 export default function Hire() {
   return (
@@ -13,7 +14,7 @@ export default function Hire() {
             <div className="col-md-4">
               <div className={style.profile}>
                 <div className="text-center">
-                  <img
+                  <Image
                     className={style.pictureuser}
                     src="/images/Ellipse 330 (1).png"
                     alt=""

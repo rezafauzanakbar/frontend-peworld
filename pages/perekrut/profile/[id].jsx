@@ -6,13 +6,14 @@ import Footer from "../../../component/footer";
 import Navbar from "../../../component/navbar_perekrut";
 import Link from "next/link";
 import style from "../../../styles/profile-perekrut.module.css";
+import Image from "next/image";
 
 export async function getStaticProps(context) {
   const { id } = context.params;
   try {
     const response = await axios({
       method: "GET",
-      url: `http://localhost:3001/perekrut/detail/${id}`,
+      url: `${process.env.NEXT_PUBLIC_API_URL}/perekrut/detail/${id}`,
     });
     return {
       props: {
@@ -35,7 +36,7 @@ export async function getStaticProps(context) {
 export async function getStaticPaths() {
   const response = await axios({
     method: "GET",
-    url: `http://localhost:3001/perekrut`,
+    url: `${process.env.NEXT_PUBLIC_API_URL}/perekrut`,
   });
   const paths = response.data.rows.map((item) => {
     return { params: { id: item.id_perekrut.toString() } };
@@ -77,13 +78,15 @@ export default function Detail(props) {
         <div className={style.latarunguprofile}></div>
         <div className={`text-center ${style.latarwhiteprofile}`}>
           <div className="container">
-            {props.data.map((data) => (
-              <div className={style.containerprofile}>
+            {props.data.map((data, index) => (
+              <div key={index.id_perekrut} className={style.containerprofile}>
                 <div className="text-center">
-                  <img
+                  <Image
                     className={style.profilepicture}
-                    src={`http://localhost:3001/foto user/${data.photo}`}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
                     alt=""
+                    height={150}
+                    width={150}
                   />
                 </div>
                 <div className="mt-3">
@@ -114,7 +117,12 @@ export default function Detail(props) {
                   <div>
                     <div className="mt-3">
                       <div className="col-auto">
-                        <img src="/images/mail (4).png" />
+                        <Image
+                          src="/images/mail (4).png"
+                          alt=""
+                          width={30}
+                          height={30}
+                        />
                       </div>
                       <div className="col-auto">
                         <span className="text-secondary">{data.email}</span>
@@ -124,7 +132,12 @@ export default function Detail(props) {
                   <div>
                     <div className="mt-3">
                       <div className="col-auto">
-                        <img src="/images/instagram.png" />
+                        <Image
+                          src="/images/instagram.png"
+                          alt=""
+                          width={30}
+                          height={30}
+                        />
                       </div>
                       <div className="col-auto">
                         {data.instagram == null ? (
@@ -142,7 +155,12 @@ export default function Detail(props) {
                   <div>
                     <div className="mt-3">
                       <div className="col-auto">
-                        <img src="/images/Vector (1).png" />
+                        <Image
+                          src="/images/Vector (1).png"
+                          alt=""
+                          width={30}
+                          height={30}
+                        />
                       </div>
                       <div className="col-auto">
                         <span className="text-secondary">{data.phone}</span>
@@ -152,7 +170,12 @@ export default function Detail(props) {
                   <div>
                     <div className="mt-3">
                       <div className="col-auto">
-                        <img src="/images/linkedin 1.png" />
+                        <Image
+                          src="/images/linkedin 1.png"
+                          alt=""
+                          width={30}
+                          height={30}
+                        />
                       </div>
                       <div className="col-auto">
                         {data.linkedin == null ? (

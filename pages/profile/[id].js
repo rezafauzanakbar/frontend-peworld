@@ -59,7 +59,7 @@ export default function Detail(props) {
     getDataLocal();
     getPortofolio();
     getExperience();
-  });
+  }, []);
 
   const getDataLocal = () => {
     const data = JSON.parse(localStorage.getItem("data"));

@@ -62,7 +62,7 @@ const Detail = (props) => {
   useEffect(() => {
     getUser();
     getPerekrut();
-  });
+  }, []);
 
   const getUser = () => {
     const data = props.data.map((data) => data.id_user);

@@ -48,36 +48,63 @@ import Image from "next/image";
 //   };
 // }
 
+//SSR
+export async function getServerSideProps(context) {
+  try {
+    const { id } = context.params;
+    const response = await axios({
+      method: "GET",
+      url: `${process.env.NEXT_PUBLIC_API_URL}/user/detail/${id}`,
+    });
+    // console.log(response.data)
+    return {
+      props: {
+        data: response.data,
+        error: false,
+        errorMessage: "",
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        data: [],
+        error: true,
+        errorMessage: "error API",
+      },
+    };
+  }
+}
+
 export default function Detail(props) {
   const router = useRouter();
 
   //get id from parameter url
-  const { id } = router.query;
+  // const { id } = router.query;
 
-  const [user, setUser] = useState([]);
+  // const [user, setUser] = useState([]);
   const [experience, setExperience] = useState([]);
   const [portofolio, setPortofolio] = useState([]);
   const [local, setLocal] = useState("");
 
   //hook useEffect
   useEffect(() => {
-    getUserDetail();
+    // getUserDetail();
     getDataLocal();
     getPortofolio();
     getExperience();
   }, []);
 
-  const getUserDetail = () => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/user/detail/${id}`)
-      .then((res) => {
-        console.log(res);
-        setUser(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const getUserDetail = () => {
+  //   axios
+  //     .get(`${process.env.NEXT_PUBLIC_API_URL}/user/detail/${id}`)
+  //     .then((res) => {
+  //       console.log(res);
+  //       setUser(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   const getDataLocal = () => {
     const data = JSON.parse(localStorage.getItem("data"));
@@ -85,7 +112,7 @@ export default function Detail(props) {
   };
 
   const getPortofolio = () => {
-    const data = user.map((data) => data.id_user);
+    const data = props.data.map((data) => data.id_user);
     const id = data[0];
     axios
       .get(`${process.env.NEXT_PUBLIC_API_URL}/portofolio/user/${id}`)
@@ -98,7 +125,7 @@ export default function Detail(props) {
   };
 
   const getExperience = () => {
-    const data = user.map((data) => data.id_user);
+    const data = props.data.map((data) => data.id_user);
     const id = data[0];
     axios
       .get(`${process.env.NEXT_PUBLIC_API_URL}/experience/user/${id}`)
@@ -142,7 +169,7 @@ export default function Detail(props) {
         <div className={style.latarwhiteprofile}>
           <div className="container">
             <div className="row">
-              {user.map((data, index) => (
+              {props.data.map((data, index) => (
                 <div key={index.id_user} className="col-md-4">
                   <div className={style.profile}>
                     <div className="text-center">

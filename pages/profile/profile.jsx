@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 
 export default function Profile() {
-  const Router = useRouter();
+  const router = useRouter();
   const [Experience, setExperience] = useState([]);
   const [Portofolio, setPortofolio] = useState([]);
   const [Local, setLocal] = useState("");
@@ -82,7 +82,7 @@ export default function Profile() {
               dangerMode: true,
             }).then(async (confirm) => {
               if (confirm) {
-                return Router.push("/profile/profile");
+                return router.push("/profile/profile");
               }
             });
           })
@@ -113,7 +113,7 @@ export default function Profile() {
               dangerMode: true,
             }).then(async (confirm) => {
               if (confirm) {
-                return Router.push("/profile/profile");
+                return router.push("/profile/profile");
               }
             });
           })

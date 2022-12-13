@@ -89,6 +89,7 @@ This app was built with some technologies below:
 RESTful API for this web application, clone this for development HireJobs.\
 
 - [backend-HireJobs](https://github.com/rezafauzanakbar/backend-peworld)
+- [deploy-vercel](https://frontend-peworld.vercel.app/)
 
 ## Contributing
 

@@ -3,13 +3,13 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-		domains: [
-			"localhost",
-			"cautious-gold-adder.cyclic.app",
-			"res.cloudinary.com",
-		],
-	},
+    domains: [
+      "localhost",
+      "cautious-gold-adder.cyclic.app",
+      "res.cloudinary.com",
+      "https://colorful-crow-kilt.cyclic.app",
+    ],
+  },
+};
 
-}
-
-module.exports = nextConfig
+module.exports = nextConfig;

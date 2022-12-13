@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import swal from "sweetalert";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -8,6 +8,7 @@ import Link from "next/link";
 import style from "../../../styles/profile-perekrut.module.css";
 import Image from "next/image";
 
+//SSG
 // export async function getStaticProps(context) {
 //   const { id } = context.params;
 //   try {
@@ -47,28 +48,35 @@ import Image from "next/image";
 //   };
 // }
 
-export default function Detail() {
+//SSR
+export async function getServerSideProps(context) {
+  try {
+    const { id } = context.params;
+    const response = await axios({
+      method: "GET",
+      url: `${process.env.NEXT_PUBLIC_API_URL}/perekrut/detail/${id}`,
+    });
+    // console.log(response.data)
+    return {
+      props: {
+        data: response.data.rows,
+        error: false,
+        errorMessage: "",
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        data: [],
+        error: true,
+        errorMessage: "error API",
+      },
+    };
+  }
+}
+
+export default function Detail(props) {
   const router = useRouter();
-  //get id from parameter url
-  const { id } = router.query;
-  const [detail, setDetail] = useState([]);
-
-  useEffect(() => {
-    getDetailPerekrut();
-  }, []);
-
-  const getDetailPerekrut = () => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/perekrut/detail/${id}`)
-      .then((res) => {
-        console.log(res.data);
-        setDetail(res.data.rows);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const logout = () => {
     swal({
       title: "Logout",
@@ -98,7 +106,7 @@ export default function Detail() {
         <div className={style.latarunguprofile}></div>
         <div className={`text-center ${style.latarwhiteprofile}`}>
           <div className="container">
-            {detail.map((data, index) => (
+            {props.data.map((data, index) => (
               <div key={index.id_perekrut} className={style.containerprofile}>
                 <div className="text-center">
                   <Image

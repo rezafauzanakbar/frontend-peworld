@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import axios from "axios";
 import style from "../../../styles/beranda.module.css";
 import Navbar from "../../../component/navbar-login";
 import Footer from "../../../component/footer";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 // export async function getServerSideProps(context) {
 //   const { data } = context.req.cookies;
@@ -33,29 +32,33 @@ import { useRouter } from "next/router";
 //   }
 // }
 
-export default function Detail() {
-  const router = useRouter();
+//SSR
+export async function getServerSideProps(context) {
+  try {
+    const { id } = context.params;
+    const response = await axios({
+      method: "GET",
+      url: `${process.env.NEXT_PUBLIC_API_URL}/hire/user/${id}`,
+    });
+    return {
+      props: {
+        data: response.data.data,
+        error: false,
+        errorMessage: "",
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        data: [],
+        error: true,
+        errorMessage: "error API",
+      },
+    };
+  }
+}
 
-  //get id from parameter url
-  const { id } = router.query;
-
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    getHiring();
-  }, []);
-
-  const getHiring = () => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/hire/user/${id}`)
-      .then((res) => {
-        console.log(res);
-        setData(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+export default function Detail(props) {
   return (
     <section>
       <Navbar />
@@ -73,7 +76,7 @@ export default function Detail() {
               <h5>Hiring You :</h5>
               <hr />
             </div>
-            {data.map((data, index) => (
+            {props.data.map((data, index) => (
               <div key={index}>
                 <div className="container">
                   <div>

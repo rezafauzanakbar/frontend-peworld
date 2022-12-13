@@ -6,6 +6,7 @@ import Footer from "../../component/footer";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
+//SSG
 // export async function getStaticProps(context) {
 //   const { id } = context.params;
 //   try {
@@ -45,14 +46,36 @@ import Image from "next/image";
 //   };
 // }
 
-const Detail = () => {
+//SSR
+export async function getServerSideProps(context) {
+  try {
+    const { id } = context.params;
+    const response = await axios({
+      method: "GET",
+      url: `${process.env.NEXT_PUBLIC_API_URL}/user/detail/${id}`,
+    });
+    return {
+      props: {
+        data: response.data,
+        error: false,
+        errorMessage: "",
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        data: [],
+        error: true,
+        errorMessage: "error API",
+      },
+    };
+  }
+}
+
+const Detail = (props) => {
   const router = useRouter();
 
-  //get id from parameter url
-  const { id } = router.query;
-
   const [user, setUser] = useState([]);
-  const [detail, setDetail] = useState([]);
   const [perekrut, setPerekrut] = useState("");
 
   const [form, setForm] = useState({
@@ -66,25 +89,12 @@ const Detail = () => {
   });
 
   useEffect(() => {
-    getUserDetail();
     getUser();
     getPerekrut();
   }, []);
 
-  const getUserDetail = () => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/user/detail/${id}`)
-      .then((res) => {
-        console.log(res);
-        setDetail(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const getUser = () => {
-    const data = detail.map((data) => data.id_user);
+    const data = props.data.map((data) => data.id_user);
     setUser(data[0]);
   };
 
@@ -124,10 +134,10 @@ const Detail = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-4">
-              {detail == "" ? (
+              {props.data == "" ? (
                 <span>Data not found</span>
               ) : (
-                detail.map((data, index) => (
+                props.data.map((data, index) => (
                   <div key={index} className={style.profile}>
                     <div className="text-center">
                       <Image
@@ -176,10 +186,10 @@ const Detail = () => {
             </div>
             <div className="col-md-8">
               <div className={style.containerform}>
-                {detail == "" ? (
+                {props.data == "" ? (
                   <span>Data not found</span>
                 ) : (
-                  detail.map((data, index) => (
+                  props.data.map((data, index) => (
                     <div key={index}>
                       <h1>Hubungi {data.name}</h1>
                       <span>

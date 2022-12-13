@@ -6,49 +6,55 @@ import Footer from "../../component/footer";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
-export async function getStaticProps(context) {
-  const { id } = context.params;
-  try {
-    const response = await axios({
-      method: "GET",
-      url: `${process.env.NEXT_PUBLIC_API_URL}/user/detail/${id}`,
-    });
-    return {
-      props: {
-        data: response.data,
-      },
-      revalidate: 10,
-      notFound: false,
-    };
-  } catch (error) {
-    return {
-      props: {
-        data: null,
-      },
-      revalidate: 10,
-      notFound: true,
-    };
-  }
-}
+// export async function getStaticProps(context) {
+//   const { id } = context.params;
+//   try {
+//     const response = await axios({
+//       method: "GET",
+//       url: `${process.env.NEXT_PUBLIC_API_URL}/user/detail/${id}`,
+//     });
+//     return {
+//       props: {
+//         data: response.data,
+//       },
+//       revalidate: 10,
+//       notFound: false,
+//     };
+//   } catch (error) {
+//     return {
+//       props: {
+//         data: null,
+//       },
+//       revalidate: 10,
+//       notFound: true,
+//     };
+//   }
+// }
 
-export async function getStaticPaths() {
-  const response = await axios({
-    method: "GET",
-    url: `${process.env.NEXT_PUBLIC_API_URL}/user/all`,
-  });
-  const paths = response.data.rows.map((item) => {
-    return { params: { id: item.id_user.toString() } };
-  });
-  return {
-    paths,
-    fallback: "blocking",
-  };
-}
+// export async function getStaticPaths() {
+//   const response = await axios({
+//     method: "GET",
+//     url: `${process.env.NEXT_PUBLIC_API_URL}/user/all`,
+//   });
+//   const paths = response.data.rows.map((item) => {
+//     return { params: { id: item.id_user.toString() } };
+//   });
+//   return {
+//     paths,
+//     fallback: "blocking",
+//   };
+// }
 
-const Detail = (props) => {
+const Detail = () => {
   const router = useRouter();
+
+  //get id from parameter url
+  const { id } = router.query;
+
   const [user, setUser] = useState([]);
+  const [detail, setDetail] = useState([]);
   const [perekrut, setPerekrut] = useState("");
+
   const [form, setForm] = useState({
     id_user: "",
     id_perekrut: "",
@@ -60,12 +66,25 @@ const Detail = (props) => {
   });
 
   useEffect(() => {
+    getUserDetail();
     getUser();
     getPerekrut();
   }, []);
 
+  const getUserDetail = () => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/user/detail/${id}`)
+      .then((res) => {
+        console.log(res);
+        setDetail(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const getUser = () => {
-    const data = props.data.map((data) => data.id_user);
+    const data = detail.map((data) => data.id_user);
     setUser(data[0]);
   };
 
@@ -105,63 +124,74 @@ const Detail = (props) => {
         <div className="container">
           <div className="row">
             <div className="col-md-4">
-              {props.data.map((data, index) => (
-                <div key={index} className={style.profile}>
-                  <div className="text-center">
-                    <Image
-                      className={style.pictureuser}
-                      src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
-                      alt=""
-                      width={150}
-                      height={150}
-                    />
+              {detail == "" ? (
+                <span>Data not found</span>
+              ) : (
+                detail.map((data, index) => (
+                  <div key={index} className={style.profile}>
+                    <div className="text-center">
+                      <Image
+                        className={style.pictureuser}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
+                        alt=""
+                        width={150}
+                        height={150}
+                      />
+                    </div>
+                    <div className="mt-3">
+                      <h5>{data.name}</h5>
+                    </div>
+                    <div className="mt-2">
+                      {data.title == null ? (
+                        <span className="text-secondary">Programmer</span>
+                      ) : (
+                        <span className="text-secondary">{data.title}</span>
+                      )}
+                    </div>
+                    <div className="mt-2">
+                      {data.city == null ? (
+                        <span className="text-secondary">
+                          Bandung, Indonesia
+                        </span>
+                      ) : (
+                        <span className="text-secondary">
+                          {data.city}, Indonesia
+                        </span>
+                      )}
+                    </div>
+                    <div className="mt-3">
+                      {data.description == null ? (
+                        <span className="text-secondary">
+                          Hello, nice to meet you. Iam Programmer profesional!
+                        </span>
+                      ) : (
+                        <span className="text-secondary">
+                          {data.description}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  <div className="mt-3">
-                    <h5>{data.name}</h5>
-                  </div>
-                  <div className="mt-2">
-                    {data.title == null ? (
-                      <span className="text-secondary">Programmer</span>
-                    ) : (
-                      <span className="text-secondary">{data.title}</span>
-                    )}
-                  </div>
-                  <div className="mt-2">
-                    {data.city == null ? (
-                      <span className="text-secondary">Bandung, Indonesia</span>
-                    ) : (
-                      <span className="text-secondary">
-                        {data.city}, Indonesia
-                      </span>
-                    )}
-                  </div>
-                  <div className="mt-3">
-                    {data.description == null ? (
-                      <span className="text-secondary">
-                        Hello, nice to meet you. Iam Programmer profesional!
-                      </span>
-                    ) : (
-                      <span className="text-secondary">{data.description}</span>
-                    )}
-                  </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
             <div className="col-md-8">
               <div className={style.containerform}>
-                {props.data.map((data, index) => (
-                  <div key={index}>
-                    <h1>Hubungi {data.name}</h1>
-                    <span>
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Nihil, voluptatibus quas harum dolore, molestiae
-                      doloremque consectetur perferendis illum quis magni nisi
-                      eos nostrum id. Aliquid dicta voluptas autem quae
-                      voluptatem!
-                    </span>
-                  </div>
-                ))}
-
+                {detail == "" ? (
+                  <span>Data not found</span>
+                ) : (
+                  detail.map((data, index) => (
+                    <div key={index}>
+                      <h1>Hubungi {data.name}</h1>
+                      <span>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing
+                        elit. Nihil, voluptatibus quas harum dolore, molestiae
+                        doloremque consectetur perferendis illum quis magni nisi
+                        eos nostrum id. Aliquid dicta voluptas autem quae
+                        voluptatem!
+                      </span>
+                    </div>
+                  ))
+                )}
                 <form onSubmit={(e) => onSubmit(e)} className="mt-5">
                   <div className="form-group">
                     <div className="mb-3 form-group">

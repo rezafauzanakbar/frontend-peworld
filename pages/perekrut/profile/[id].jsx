@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -8,47 +8,67 @@ import Link from "next/link";
 import style from "../../../styles/profile-perekrut.module.css";
 import Image from "next/image";
 
-export async function getStaticProps(context) {
-  const { id } = context.params;
-  try {
-    const response = await axios({
-      method: "GET",
-      url: `${process.env.NEXT_PUBLIC_API_URL}/perekrut/detail/${id}`,
-    });
-    return {
-      props: {
-        data: response.data.rows,
-      },
-      revalidate: 10,
-      notFound: false,
-    };
-  } catch (error) {
-    return {
-      props: {
-        data: null,
-      },
-      revalidate: 10,
-      notFound: true,
-    };
-  }
-}
+// export async function getStaticProps(context) {
+//   const { id } = context.params;
+//   try {
+//     const response = await axios({
+//       method: "GET",
+//       url: `${process.env.NEXT_PUBLIC_API_URL}/perekrut/detail/${id}`,
+//     });
+//     return {
+//       props: {
+//         data: response.data.rows,
+//       },
+//       revalidate: 10,
+//       notFound: false,
+//     };
+//   } catch (error) {
+//     return {
+//       props: {
+//         data: null,
+//       },
+//       revalidate: 10,
+//       notFound: true,
+//     };
+//   }
+// }
 
-export async function getStaticPaths() {
-  const response = await axios({
-    method: "GET",
-    url: `${process.env.NEXT_PUBLIC_API_URL}/perekrut`,
-  });
-  const paths = response.data.rows.map((item) => {
-    return { params: { id: item.id_perekrut.toString() } };
-  });
-  return {
-    paths,
-    fallback: "blocking",
-  };
-}
+// export async function getStaticPaths() {
+//   const response = await axios({
+//     method: "GET",
+//     url: `${process.env.NEXT_PUBLIC_API_URL}/perekrut`,
+//   });
+//   const paths = response.data.rows.map((item) => {
+//     return { params: { id: item.id_perekrut.toString() } };
+//   });
+//   return {
+//     paths,
+//     fallback: "blocking",
+//   };
+// }
 
-export default function Detail(props) {
+export default function Detail() {
   const router = useRouter();
+  //get id from parameter url
+  const { id } = router.query;
+  const [detail, setDetail] = useState([]);
+
+  useEffect(() => {
+    getDetailPerekrut();
+  }, []);
+
+  const getDetailPerekrut = () => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/perekrut/detail/${id}`)
+      .then((res) => {
+        console.log(res.data);
+        setDetail(res.data.rows);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const logout = () => {
     swal({
       title: "Logout",
@@ -78,7 +98,7 @@ export default function Detail(props) {
         <div className={style.latarunguprofile}></div>
         <div className={`text-center ${style.latarwhiteprofile}`}>
           <div className="container">
-            {props.data.map((data, index) => (
+            {detail.map((data, index) => (
               <div key={index.id_perekrut} className={style.containerprofile}>
                 <div className="text-center">
                   <Image

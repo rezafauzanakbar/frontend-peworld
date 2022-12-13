@@ -9,57 +9,75 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
-export async function getStaticProps(context) {
-  const { id } = context.params;
-  try {
-    const response = await axios({
-      method: "GET",
-      url: `${process.env.NEXT_PUBLIC_API_URL}/user/detail/${id}`,
-    });
-    return {
-      props: {
-        data: response.data,
-      },
-      revalidate: 10,
-      notFound: false,
-    };
-  } catch (error) {
-    return {
-      props: {
-        data: null,
-      },
-      revalidate: 10,
-      notFound: true,
-    };
-  }
-}
+// export async function getStaticProps(context) {
+//   const { id } = context.params;
+//   try {
+//     const response = await axios({
+//       method: "GET",
+//       url: `${process.env.NEXT_PUBLIC_API_URL}/user/detail/${id}`,
+//     });
+//     return {
+//       props: {
+//         data: response.data,
+//       },
+//       revalidate: 10,
+//       notFound: false,
+//     };
+//   } catch (error) {
+//     return {
+//       props: {
+//         data: null,
+//       },
+//       revalidate: 10,
+//       notFound: true,
+//     };
+//   }
+// }
 
-export async function getStaticPaths() {
-  const response = await axios({
-    method: "GET",
-    url: `${process.env.NEXT_PUBLIC_API_URL}/user/all`,
-  });
-  const paths = response.data.rows.map((item) => {
-    return { params: { id: item.id_user.toString() } };
-  });
-  return {
-    paths,
-    fallback: "blocking",
-  };
-}
+// export async function getStaticPaths() {
+//   const response = await axios({
+//     method: "GET",
+//     url: `${process.env.NEXT_PUBLIC_API_URL}/user/all`,
+//   });
+//   const paths = response.data.rows.map((item) => {
+//     return { params: { id: item.id_user.toString() } };
+//   });
+//   return {
+//     paths,
+//     fallback: "blocking",
+//   };
+// }
 
 export default function Detail(props) {
   const router = useRouter();
+
+  //get id from parameter url
+  const { id } = router.query;
+
+  const [user, setUser] = useState([]);
   const [experience, setExperience] = useState([]);
   const [portofolio, setPortofolio] = useState([]);
   const [local, setLocal] = useState("");
 
   //hook useEffect
   useEffect(() => {
+    getUserDetail();
     getDataLocal();
     getPortofolio();
     getExperience();
   }, []);
+
+  const getUserDetail = () => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/user/detail/${id}`)
+      .then((res) => {
+        console.log(res);
+        setUser(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const getDataLocal = () => {
     const data = JSON.parse(localStorage.getItem("data"));
@@ -67,7 +85,7 @@ export default function Detail(props) {
   };
 
   const getPortofolio = () => {
-    const data = props.data.map((data) => data.id_user);
+    const data = user.map((data) => data.id_user);
     const id = data[0];
     axios
       .get(`${process.env.NEXT_PUBLIC_API_URL}/portofolio/user/${id}`)
@@ -80,7 +98,7 @@ export default function Detail(props) {
   };
 
   const getExperience = () => {
-    const data = props.data.map((data) => data.id_user);
+    const data = user.map((data) => data.id_user);
     const id = data[0];
     axios
       .get(`${process.env.NEXT_PUBLIC_API_URL}/experience/user/${id}`)
@@ -124,7 +142,7 @@ export default function Detail(props) {
         <div className={style.latarwhiteprofile}>
           <div className="container">
             <div className="row">
-              {props.data.map((data, index) => (
+              {user.map((data, index) => (
                 <div key={index.id_user} className="col-md-4">
                   <div className={style.profile}>
                     <div className="text-center">
@@ -309,7 +327,6 @@ export default function Detail(props) {
                   </div>
                 </div>
               ))}
-
               <div className="col-md-8">
                 <div className={style.experienceprofile}>
                   <div className="container container-custom-history">

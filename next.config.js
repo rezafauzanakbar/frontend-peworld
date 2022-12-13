@@ -7,7 +7,7 @@ const nextConfig = {
       "localhost",
       "cautious-gold-adder.cyclic.app",
       "res.cloudinary.com",
-      "https://colorful-crow-kilt.cyclic.app",
+      "colorful-crow-kilt.cyclic.app",
     ],
   },
 };

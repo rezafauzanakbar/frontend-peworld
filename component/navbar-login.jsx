@@ -27,7 +27,7 @@ export default function NavbarLogin() {
                 <i className="fa fa-envelope" />
               </div>
               <div className="col-auto">
-                <Link href={`/profile/profile`}>
+                <Link href={`/profile/${local.id_user}`}>
                   <img
                     className={style.navbarpictureuser}
                     src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${local.photo}`}

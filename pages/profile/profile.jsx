@@ -389,7 +389,8 @@ export default function Profile() {
                                     <div className={style.card}>
                                       <Image
                                         className={style.pictureportofolio}
-                                        src={`${process.env.NEXT_PUBLIC_API_URL}/image portofolio/${data.image}`}
+                                        // src={`${process.env.NEXT_PUBLIC_API_URL}/image portofolio/${data.image}`}
+                                        src={data.image_url}
                                         alt=""
                                         height={150}
                                         width={150}

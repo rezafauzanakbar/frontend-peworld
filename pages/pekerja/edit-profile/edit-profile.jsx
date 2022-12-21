@@ -191,57 +191,63 @@ export default function EditProfile() {
         <div className={style.latarwhiteprofile}>
           <div className="container">
             <div className="row">
-              {user.map((data, index) => (
-                <div key={index.id_user} className="col-md-4">
-                  <div className={style.profile}>
-                    <div className="text-center">
-                      <Image
-                        className={style.pictureuser}
-                        src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
-                        alt="profile picture"
-                        width={150}
-                        height={150}
-                      />
+              {user == "" ? (
+                <span className="text-center">Loading...</span>
+              ) : (
+                user.map((data, index) => (
+                  <div key={index.id_user} className="col-md-4">
+                    <div className={style.profile}>
+                      <div className="text-center">
+                        <Image
+                          className={style.pictureuser}
+                          src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
+                          alt="profile picture"
+                          width={150}
+                          height={150}
+                        />
+                      </div>
+                      <div>
+                        <h5 className="mt-3">{data.name}</h5>
+                      </div>
+                      <div className="mt-1">
+                        {data.job_desk == null ? (
+                          <span className="text-secondary">Programmer</span>
+                        ) : (
+                          <span className="text-secondary">
+                            {data.job_desk}
+                          </span>
+                        )}
+                      </div>
+                      <div className="mt-1">
+                        {data.city == null ? (
+                          <span className="text-secondary">
+                            Bandung, Indonesia
+                          </span>
+                        ) : (
+                          <span className="text-secondary">
+                            {data.city}, Indonesia
+                          </span>
+                        )}
+                      </div>
+                      <div className="mt-1">
+                        <span className="text-secondary">Freelancer</span>
+                      </div>
                     </div>
                     <div>
-                      <h5 className="mt-3">{data.name}</h5>
-                    </div>
-                    <div className="mt-1">
-                      {data.job_desk == null ? (
-                        <span className="text-secondary">Programmer</span>
-                      ) : (
-                        <span className="text-secondary">{data.job_desk}</span>
-                      )}
-                    </div>
-                    <div className="mt-1">
-                      {data.city == null ? (
-                        <span className="text-secondary">
-                          Bandung, Indonesia
-                        </span>
-                      ) : (
-                        <span className="text-secondary">
-                          {data.city}, Indonesia
-                        </span>
-                      )}
-                    </div>
-                    <div className="mt-1">
-                      <span className="text-secondary">Freelancer</span>
+                      <div className="mt-3">
+                        <Link href="/profile/profile">
+                          <button className={style.buttonsave}>Simpan</button>
+                        </Link>
+                      </div>
+                      <div className="mt-3">
+                        <Link href="/profile/profile">
+                          <button className={style.buttoncancel}>Batal</button>
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <div className="mt-3">
-                      <Link href="/profile/profile">
-                        <button className={style.buttonsave}>Simpan</button>
-                      </Link>
-                    </div>
-                    <div className="mt-3">
-                      <Link href="/profile/profile">
-                        <button className={style.buttoncancel}>Batal</button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                ))
+              )}
 
               <div className="col-md-8">
                 <div className={style.containereditprofile}>

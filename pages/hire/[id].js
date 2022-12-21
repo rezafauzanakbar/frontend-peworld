@@ -135,7 +135,7 @@ const Detail = (props) => {
           <div className="row">
             <div className="col-md-4">
               {props.data == "" ? (
-                <span>Data not found</span>
+                <span className="text-center">Loading...</span>
               ) : (
                 props.data.map((data, index) => (
                   <div key={index} className={style.profile}>
@@ -187,7 +187,7 @@ const Detail = (props) => {
             <div className="col-md-8">
               <div className={style.containerform}>
                 {props.data == "" ? (
-                  <span>Data not found</span>
+                  <span className="text-center">Loading...</span>
                 ) : (
                   props.data.map((data, index) => (
                     <div key={index}>

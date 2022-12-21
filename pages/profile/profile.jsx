@@ -155,184 +155,190 @@ export default function Profile() {
         <div className={style.latarwhiteprofile}>
           <div className="container">
             <div className="row">
-              {Profile.map((data, index) => (
-                <div key={index.id_user} className="col-md-4">
-                  <div className={style.profile}>
-                    <div className="text-center">
-                      <Image
-                        className={style.pictureuser}
-                        src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
-                        alt="profile picture"
-                        width={150}
-                        height={150}
-                      />
-                    </div>
-                    <div className="mt-3 text-center">
-                      <Link href="/pekerja/edit-profile/edit-profile">
-                        <span className="text-secondary">
-                          <i class="fa fa-pencil"></i> Edit
-                        </span>
-                      </Link>
-                    </div>
-                    <div>
-                      <h5 className="mt-3">{data.name}</h5>
-                    </div>
-                    <div className="mt-1">
-                      {data.title == null ? (
-                        <span className="text-secondary">Programmer</span>
+              {Profile == "" ? (
+                <span className="text-center">Loading...</span>
+              ) : (
+                Profile.map((data, index) => (
+                  <div key={index.id_user} className="col-md-4">
+                    <div className={style.profile}>
+                      <div className="text-center">
+                        <Image
+                          className={style.pictureuser}
+                          src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
+                          alt="profile picture"
+                          width={150}
+                          height={150}
+                        />
+                      </div>
+                      <div className="mt-3 text-center">
+                        <Link href="/pekerja/edit-profile/edit-profile">
+                          <span className="text-secondary">
+                            <i class="fa fa-pencil"></i> Edit
+                          </span>
+                        </Link>
+                      </div>
+                      <div>
+                        <h5 className="mt-3">{data.name}</h5>
+                      </div>
+                      <div className="mt-1">
+                        {data.title == null ? (
+                          <span className="text-secondary">Programmer</span>
+                        ) : (
+                          <span className="text-secondary">{data.title}</span>
+                        )}
+                      </div>
+                      <div className="mt-1">
+                        {data.city == null ? (
+                          <span className="text-secondary">
+                            Bandung, Indonesia
+                          </span>
+                        ) : (
+                          <span className="text-secondary">
+                            {data.city}, Indonesia
+                          </span>
+                        )}
+                      </div>
+                      <div className="mt-1">
+                        <span className="text-secondary">Freelancer</span>
+                      </div>
+                      <div className="mt-4">
+                        {data.description == null ? (
+                          <span className="text-secondary">
+                            Hello, nice to meet you. Iam Programmer profesional!
+                          </span>
+                        ) : (
+                          <span className="text-secondary">
+                            {data.description}
+                          </span>
+                        )}
+                      </div>
+                      {Local.level == 1 ? (
+                        <Link href="/hire/hire">
+                          <div className="text-center mt-4">
+                            <button className={style.buttonhireprofile}>
+                              Hire
+                            </button>
+                          </div>
+                        </Link>
                       ) : (
-                        <span className="text-secondary">{data.title}</span>
-                      )}
-                    </div>
-                    <div className="mt-1">
-                      {data.city == null ? (
-                        <span className="text-secondary">
-                          Bandung, Indonesia
-                        </span>
-                      ) : (
-                        <span className="text-secondary">
-                          {data.city}, Indonesia
-                        </span>
-                      )}
-                    </div>
-                    <div className="mt-1">
-                      <span className="text-secondary">Freelancer</span>
-                    </div>
-                    <div className="mt-4">
-                      {data.description == null ? (
-                        <span className="text-secondary">
-                          Hello, nice to meet you. Iam Programmer profesional!
-                        </span>
-                      ) : (
-                        <span className="text-secondary">
-                          {data.description}
-                        </span>
-                      )}
-                    </div>
-                    {Local.level == 1 ? (
-                      <Link href="/hire/hire">
                         <div className="text-center mt-4">
-                          <button className={style.buttonhireprofile}>
-                            Hire
+                          <button
+                            onClick={logout}
+                            className={style.buttonhireprofile}
+                          >
+                            Log Out
                           </button>
                         </div>
-                      </Link>
-                    ) : (
-                      <div className="text-center mt-4">
-                        <button
-                          onClick={logout}
-                          className={style.buttonhireprofile}
-                        >
-                          Log Out
-                        </button>
-                      </div>
-                    )}
+                      )}
 
-                    <div className="mt-4">
-                      <div>
-                        <h5>Skill</h5>
-                      </div>
-                      <div className="mt-3">
-                        <li className={style.skilluserprofile}>Python</li>
-                        <li className={style.skilluserprofile}>Laravel</li>
-                        <li className={style.skilluserprofile}>Golang</li>
-                        <li className={style.skilluserprofile}>Javascript</li>
-                        <li className={style.skilluserprofile}>PHP</li>
-                        <li className={style.skilluserprofile}>HTML</li>
-                        <li className={style.skilluserprofile}>C++</li>
-                        <li className={style.skilluserprofile}>Kotlin</li>
-                        <li className={style.skilluserprofile}>Swift</li>
-                      </div>
-                    </div>
-                    <div className="mt-5">
-                      <div>
-                        <div className="row mt-3">
-                          <div className="col-md-2">
-                            <Image
-                              src="/images/mail (4).png"
-                              alt=""
-                              width={30}
-                              height={30}
-                            />
-                          </div>
-                          <div className="col-md-10">
-                            <span className="text-secondary">{data.email}</span>
-                          </div>
+                      <div className="mt-4">
+                        <div>
+                          <h5>Skill</h5>
+                        </div>
+                        <div className="mt-3">
+                          <li className={style.skilluserprofile}>Python</li>
+                          <li className={style.skilluserprofile}>Laravel</li>
+                          <li className={style.skilluserprofile}>Golang</li>
+                          <li className={style.skilluserprofile}>Javascript</li>
+                          <li className={style.skilluserprofile}>PHP</li>
+                          <li className={style.skilluserprofile}>HTML</li>
+                          <li className={style.skilluserprofile}>C++</li>
+                          <li className={style.skilluserprofile}>Kotlin</li>
+                          <li className={style.skilluserprofile}>Swift</li>
                         </div>
                       </div>
-                      <div>
-                        <div className="row mt-3">
-                          <div className="col-md-2">
-                            <Image
-                              src="/images/instagram.png"
-                              alt=""
-                              width={30}
-                              height={30}
-                            />
-                          </div>
-                          <div className="col-md-10">
-                            {data.instagram == null ? (
+                      <div className="mt-5">
+                        <div>
+                          <div className="row mt-3">
+                            <div className="col-md-2">
+                              <Image
+                                src="/images/mail (4).png"
+                                alt=""
+                                width={30}
+                                height={30}
+                              />
+                            </div>
+                            <div className="col-md-10">
                               <span className="text-secondary">
-                                @your_instagram
+                                {data.email}
                               </span>
-                            ) : (
-                              <span className="text-secondary">
-                                {data.instagram}
-                              </span>
-                            )}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div>
-                        <div className="row mt-3">
-                          <div className="col-md-2">
-                            <Image
-                              src="/images/github.png"
-                              alt=""
-                              width={30}
-                              height={30}
-                            />
-                          </div>
-                          <div className="col-md-10">
-                            {data.github == null ? (
-                              <span className="text-secondary">
-                                @your_github
-                              </span>
-                            ) : (
-                              <span className="text-secondary">
-                                {data.github}
-                              </span>
-                            )}
+                        <div>
+                          <div className="row mt-3">
+                            <div className="col-md-2">
+                              <Image
+                                src="/images/instagram.png"
+                                alt=""
+                                width={30}
+                                height={30}
+                              />
+                            </div>
+                            <div className="col-md-10">
+                              {data.instagram == null ? (
+                                <span className="text-secondary">
+                                  @your_instagram
+                                </span>
+                              ) : (
+                                <span className="text-secondary">
+                                  {data.instagram}
+                                </span>
+                              )}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div>
-                        <div className="row mt-3">
-                          <div className="col-md-2">
-                            <Image
-                              src="/images/gitlab.png"
-                              alt=""
-                              width={30}
-                              height={30}
-                            />
+                        <div>
+                          <div className="row mt-3">
+                            <div className="col-md-2">
+                              <Image
+                                src="/images/github.png"
+                                alt=""
+                                width={30}
+                                height={30}
+                              />
+                            </div>
+                            <div className="col-md-10">
+                              {data.github == null ? (
+                                <span className="text-secondary">
+                                  @your_github
+                                </span>
+                              ) : (
+                                <span className="text-secondary">
+                                  {data.github}
+                                </span>
+                              )}
+                            </div>
                           </div>
-                          <div className="col-md-10">
-                            {data.gitlab == null ? (
-                              <span className="text-secondary">
-                                @your_gitlab
-                              </span>
-                            ) : (
-                              <span className="text-secondary">
-                                {data.gitlab}
-                              </span>
-                            )}
+                        </div>
+                        <div>
+                          <div className="row mt-3">
+                            <div className="col-md-2">
+                              <Image
+                                src="/images/gitlab.png"
+                                alt=""
+                                width={30}
+                                height={30}
+                              />
+                            </div>
+                            <div className="col-md-10">
+                              {data.gitlab == null ? (
+                                <span className="text-secondary">
+                                  @your_gitlab
+                                </span>
+                              ) : (
+                                <span className="text-secondary">
+                                  {data.gitlab}
+                                </span>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
 
               <div className="col-md-8">
                 <div className={style.experienceprofile}>

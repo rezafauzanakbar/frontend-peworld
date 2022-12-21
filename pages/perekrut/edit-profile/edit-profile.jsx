@@ -76,28 +76,32 @@ export default function EditProfile() {
           <div className="container">
             <div className="row">
               <div className="col-md-4">
-                {user.map((data, index) => (
-                  <div key={index.id_perekrut} className={style.profile}>
-                    <div className="text-center">
-                      <Image
-                        className={style.pictureuser}
-                        src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
-                        alt=""
-                        width={150}
-                        height={150}
-                      />
+                {user == "" ? (
+                  <span className="text-center">Loading...</span>
+                ) : (
+                  user.map((data, index) => (
+                    <div key={index.id_perekrut} className={style.profile}>
+                      <div className="text-center">
+                        <Image
+                          className={style.pictureuser}
+                          src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
+                          alt=""
+                          width={150}
+                          height={150}
+                        />
+                      </div>
+                      <div className="mt-3">
+                        <h5>{data.perusahaan}</h5>
+                      </div>
+                      <div className="mt-1">
+                        <span>{data.jabatan}</span>
+                      </div>
+                      <div className="mt-1">
+                        <span className="text-secondary">{data.address}</span>
+                      </div>
                     </div>
-                    <div className="mt-3">
-                      <h5>{data.perusahaan}</h5>
-                    </div>
-                    <div className="mt-1">
-                      <span>{data.jabatan}</span>
-                    </div>
-                    <div className="mt-1">
-                      <span className="text-secondary">{data.address}</span>
-                    </div>
-                  </div>
-                ))}
+                  ))
+                )}
 
                 <div>
                   <div className="mt-3">
@@ -116,211 +120,215 @@ export default function EditProfile() {
                 </div>
               </div>
               <div className="col-md-8">
-                {user.map((data, index) => (
-                  <div
-                    key={index.id_perekrut}
-                    className={style.containereditprofile}
-                  >
-                    <div className={style.title}>
-                      <h5>Data Diri</h5>
-                      <hr />
+                {user == "" ? (
+                  <span className="text-center">Loading...</span>
+                ) : (
+                  user.map((data, index) => (
+                    <div
+                      key={index.id_perekrut}
+                      className={style.containereditprofile}
+                    >
+                      <div className={style.title}>
+                        <h5>Data Diri</h5>
+                        <hr />
+                      </div>
+                      <form>
+                        <div className="form-group">
+                          <div className="mb-3 form-group">
+                            <label
+                              style={{ color: "#696f79" }}
+                              className="form-label"
+                            >
+                              Nama Perusahaan
+                            </label>
+                            <input
+                              type="text"
+                              className="input form-control"
+                              id=""
+                              defaultValue={data.perusahaan}
+                              aria-describedby=""
+                              onChange={(e) =>
+                                setUpdate({
+                                  ...update,
+                                  perusahaan: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                        </div>
+                        <div className="form-group">
+                          <div className="mb-3 form-group">
+                            <label
+                              style={{ color: "#696f79" }}
+                              className="form-label"
+                            >
+                              Bidang
+                            </label>
+                            <input
+                              type="text"
+                              className="input form-control"
+                              id=""
+                              defaultValue={data.jabatan}
+                              aria-describedby=""
+                              onChange={(e) =>
+                                setUpdate({
+                                  ...update,
+                                  jabatan: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                        </div>
+                        <div className="form-group">
+                          <div className="mb-3 form-group">
+                            <label
+                              style={{ color: "#696f79" }}
+                              className="form-label"
+                            >
+                              Kota
+                            </label>
+                            <input
+                              type="text"
+                              className="input form-control"
+                              id=""
+                              defaultValue={data.address}
+                              aria-describedby=""
+                              onChange={(e) =>
+                                setUpdate({
+                                  ...update,
+                                  address: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                        </div>
+                        <div className="form-group">
+                          <div className="mb-3 form-group">
+                            <label
+                              style={{ color: "#696f79" }}
+                              className="form-label"
+                            >
+                              Description
+                            </label>
+                            <input
+                              type="text"
+                              className="input form-control"
+                              id=""
+                              defaultValue={
+                                data.description == null
+                                  ? "Masukan detail anda"
+                                  : data.description
+                              }
+                              aria-describedby=""
+                              onChange={(e) =>
+                                setUpdate({
+                                  ...update,
+                                  description: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                        </div>
+                        <div className="form-group">
+                          <div className="mb-3 form-group">
+                            <label
+                              style={{ color: "#696f79" }}
+                              className="form-label"
+                            >
+                              Email
+                            </label>
+                            <input
+                              type="text"
+                              className="input form-control"
+                              id=""
+                              defaultValue={data.email}
+                              aria-describedby=""
+                              onChange={(e) =>
+                                setUpdate({
+                                  ...update,
+                                  email: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                        </div>
+                        <div className="form-group">
+                          <div className="mb-3 form-group">
+                            <label
+                              style={{ color: "#696f79" }}
+                              className="form-label"
+                            >
+                              Instagram
+                            </label>
+                            <input
+                              type="text"
+                              className="input form-control"
+                              id=""
+                              defaultValue={data.instagram}
+                              aria-describedby=""
+                              onChange={(e) =>
+                                setUpdate({
+                                  ...update,
+                                  instagram: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                        </div>
+                        <div className="form-group">
+                          <div className="mb-3 form-group">
+                            <label
+                              style={{ color: "#696f79" }}
+                              className="form-label"
+                            >
+                              No Telephone
+                            </label>
+                            <input
+                              type="text"
+                              className="input form-control"
+                              id=""
+                              defaultValue={data.phone}
+                              aria-describedby=""
+                              onChange={(e) =>
+                                setUpdate({
+                                  ...update,
+                                  phone: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                        </div>
+                        <div className="form-group">
+                          <div className="mb-3 form-group">
+                            <label
+                              style={{ color: "#696f79" }}
+                              className="form-label"
+                            >
+                              Linkedin
+                            </label>
+                            <input
+                              type="text"
+                              className="input form-control"
+                              id=""
+                              defaultValue={
+                                data.linkedin == null
+                                  ? "Masukkan link lingkedin"
+                                  : data.linkedin
+                              }
+                              aria-describedby=""
+                              onChange={(e) =>
+                                setUpdate({
+                                  ...update,
+                                  linkedin: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                        </div>
+                      </form>
                     </div>
-                    <form>
-                      <div className="form-group">
-                        <div className="mb-3 form-group">
-                          <label
-                            style={{ color: "#696f79" }}
-                            className="form-label"
-                          >
-                            Nama Perusahaan
-                          </label>
-                          <input
-                            type="text"
-                            className="input form-control"
-                            id=""
-                            defaultValue={data.perusahaan}
-                            aria-describedby=""
-                            onChange={(e) =>
-                              setUpdate({
-                                ...update,
-                                perusahaan: e.target.value,
-                              })
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <div className="mb-3 form-group">
-                          <label
-                            style={{ color: "#696f79" }}
-                            className="form-label"
-                          >
-                            Bidang
-                          </label>
-                          <input
-                            type="text"
-                            className="input form-control"
-                            id=""
-                            defaultValue={data.jabatan}
-                            aria-describedby=""
-                            onChange={(e) =>
-                              setUpdate({
-                                ...update,
-                                jabatan: e.target.value,
-                              })
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <div className="mb-3 form-group">
-                          <label
-                            style={{ color: "#696f79" }}
-                            className="form-label"
-                          >
-                            Kota
-                          </label>
-                          <input
-                            type="text"
-                            className="input form-control"
-                            id=""
-                            defaultValue={data.address}
-                            aria-describedby=""
-                            onChange={(e) =>
-                              setUpdate({
-                                ...update,
-                                address: e.target.value,
-                              })
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <div className="mb-3 form-group">
-                          <label
-                            style={{ color: "#696f79" }}
-                            className="form-label"
-                          >
-                            Description
-                          </label>
-                          <input
-                            type="text"
-                            className="input form-control"
-                            id=""
-                            defaultValue={
-                              data.description == null
-                                ? "Masukan detail anda"
-                                : data.description
-                            }
-                            aria-describedby=""
-                            onChange={(e) =>
-                              setUpdate({
-                                ...update,
-                                description: e.target.value,
-                              })
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <div className="mb-3 form-group">
-                          <label
-                            style={{ color: "#696f79" }}
-                            className="form-label"
-                          >
-                            Email
-                          </label>
-                          <input
-                            type="text"
-                            className="input form-control"
-                            id=""
-                            defaultValue={data.email}
-                            aria-describedby=""
-                            onChange={(e) =>
-                              setUpdate({
-                                ...update,
-                                email: e.target.value,
-                              })
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <div className="mb-3 form-group">
-                          <label
-                            style={{ color: "#696f79" }}
-                            className="form-label"
-                          >
-                            Instagram
-                          </label>
-                          <input
-                            type="text"
-                            className="input form-control"
-                            id=""
-                            defaultValue={data.instagram}
-                            aria-describedby=""
-                            onChange={(e) =>
-                              setUpdate({
-                                ...update,
-                                instagram: e.target.value,
-                              })
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <div className="mb-3 form-group">
-                          <label
-                            style={{ color: "#696f79" }}
-                            className="form-label"
-                          >
-                            No Telephone
-                          </label>
-                          <input
-                            type="text"
-                            className="input form-control"
-                            id=""
-                            defaultValue={data.phone}
-                            aria-describedby=""
-                            onChange={(e) =>
-                              setUpdate({
-                                ...update,
-                                phone: e.target.value,
-                              })
-                            }
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <div className="mb-3 form-group">
-                          <label
-                            style={{ color: "#696f79" }}
-                            className="form-label"
-                          >
-                            Linkedin
-                          </label>
-                          <input
-                            type="text"
-                            className="input form-control"
-                            id=""
-                            defaultValue={
-                              data.linkedin == null
-                                ? "Masukkan link lingkedin"
-                                : data.linkedin
-                            }
-                            aria-describedby=""
-                            onChange={(e) =>
-                              setUpdate({
-                                ...update,
-                                linkedin: e.target.value,
-                              })
-                            }
-                          />
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
             </div>
           </div>

@@ -41,28 +41,32 @@ export default function ResultHire() {
               <h5>Hiring You :</h5>
               <hr />
             </div>
-            {hire.map((data, index) => (
-              <div key={index}>
-                <div className="container">
-                  <div>
-                    <span className="text-secondary">Name Project :</span>
-                    <h5>{data.name_project}</h5>
+            {hire == "" ? (
+              <span className="text-center">Loading...</span>
+            ) : (
+              hire.map((data, index) => (
+                <div key={index}>
+                  <div className="container">
+                    <div>
+                      <span className="text-secondary">Name Project :</span>
+                      <h5>{data.name_project}</h5>
+                    </div>
+                    <div>
+                      <span className="text-secondary">
+                        Description Project :{" "}
+                      </span>
+                      <p className="mt-1">{data.description_project}</p>
+                    </div>
+                    <div>
+                      <Link href={`/pekerja/result-hire/${data.id_hire}`}>
+                        <button className="btn btn-success">Accept</button>
+                      </Link>
+                    </div>
                   </div>
-                  <div>
-                    <span className="text-secondary">
-                      Description Project :{" "}
-                    </span>
-                    <p className="mt-1">{data.description_project}</p>
-                  </div>
-                  <div>
-                    <Link href={`/pekerja/result-hire/${data.id_hire}`}>
-                      <button className="btn btn-success">Accept</button>
-                    </Link>
-                  </div>
+                  <hr />
                 </div>
-                <hr />
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </div>

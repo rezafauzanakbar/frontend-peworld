@@ -159,7 +159,7 @@ export default function Home() {
         <div className="container">
           <div className={style.containermain}>
             {hire == "" ? (
-              <span className="text-center">Data not found!</span>
+              <span className="text-center">Loading...</span>
             ) : (
               search(hire).map((data, index) => (
                 <div key={index}>

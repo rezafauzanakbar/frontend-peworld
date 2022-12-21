@@ -415,7 +415,7 @@ export default function Detail(props) {
                                     <div className={style.card}>
                                       <Image
                                         className={style.pictureportofolio}
-                                        src={`${process.env.NEXT_PUBLIC_API_URL}/image portofolio/${data.image}`}
+                                        src={data.image_url}
                                         alt=""
                                         width={320}
                                         height={320}

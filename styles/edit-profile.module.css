@@ -25,6 +25,10 @@
   border: none;
 }
 
+.input {
+  display: none;
+}
+
 .buttonsave {
   background: #5e50a1;
   border-radius: 4px;

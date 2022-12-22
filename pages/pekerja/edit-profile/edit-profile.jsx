@@ -198,12 +198,19 @@ export default function EditProfile() {
                   <div key={index.id_user} className="col-md-4">
                     <div className={style.profile}>
                       <div className="text-center">
-                        <Image
-                          className={style.pictureuser}
-                          src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
-                          alt="profile picture"
-                          width={150}
-                          height={150}
+                        <label htmlFor="addImage" style={{ cursor: "pointer" }}>
+                          <Image
+                            className={style.pictureuser}
+                            src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
+                            alt="profile picture"
+                            width={150}
+                            height={150}
+                          />
+                        </label>
+                        <input
+                          className={style.input}
+                          type="file"
+                          id="addImage"
                         />
                       </div>
                       <div>

@@ -178,7 +178,11 @@ export default function Detail(props) {
                       <div className="text-center">
                         <Image
                           className={style.pictureuser}
-                          src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
+                          src={
+                            data.photo_url
+                              ? data.photo_url
+                              : `${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`
+                          }
                           alt="profile picture"
                           width={150}
                           height={150}

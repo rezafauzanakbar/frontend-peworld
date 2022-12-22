@@ -168,7 +168,11 @@ export default function Home() {
                       <div className="text-center mt-3">
                         <Image
                           className={style.pictureuser}
-                          src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
+                          src={
+                            data.photo_url
+                              ? data.photo_url
+                              : `${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`
+                          }
                           alt=""
                           width={100}
                           height={100}

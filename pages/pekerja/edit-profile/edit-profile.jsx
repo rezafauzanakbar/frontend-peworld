@@ -11,6 +11,7 @@ import Image from "next/image";
 export default function EditProfile() {
   const router = useRouter();
   const [user, setUser] = useState([]);
+  const [image, setImage] = useState();
   const [experience, setExperience] = useState({
     id_user: "",
     job_title: "",
@@ -183,6 +184,28 @@ export default function EditProfile() {
     });
   };
 
+  const handleChange = (event) => {
+    const fileUploaded = event.target.files[0];
+    document.getElementById("addImage").innerHTML = fileUploaded.name;
+    setImage(fileUploaded);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = JSON.parse(localStorage.getItem("data"));
+    const id = data.id_user;
+    let inputForm = new FormData();
+    inputForm.append("photo", image);
+    axios
+      .put(`${process.env.NEXT_PUBLIC_API_URL}/user/photo/${id}`, inputForm)
+      .then((res) => {
+        console.log(res.data);
+        return navigate("/profile");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <section>
       <Navbar />
@@ -201,10 +224,15 @@ export default function EditProfile() {
                         <label htmlFor="addImage" style={{ cursor: "pointer" }}>
                           <Image
                             className={style.pictureuser}
-                            src={data.photo_url}
+                            src={
+                              data.photo_url
+                                ? data.photo_url
+                                : `${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`
+                            }
                             alt="profile picture"
                             width={150}
                             height={150}
+                            onChange={handleChange}
                           />
                         </label>
                         <input
@@ -212,6 +240,12 @@ export default function EditProfile() {
                           type="file"
                           id="addImage"
                         />
+                        <button
+                          onClick={handleSubmit}
+                          className="button-save mt-3"
+                        >
+                          Simpan Photo
+                        </button>
                       </div>
                       <div>
                         <h5 className="mt-3">{data.name}</h5>

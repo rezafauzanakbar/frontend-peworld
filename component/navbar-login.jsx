@@ -30,7 +30,7 @@ export default function NavbarLogin() {
                 <Link href={`/profile/profile`}>
                   <img
                     className={style.navbarpictureuser}
-                    src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${local.photo}`}
+                    src={local.photo_url}
                     alt="profile picture"
                   />
                 </Link>

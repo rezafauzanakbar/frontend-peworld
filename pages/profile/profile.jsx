@@ -164,7 +164,7 @@ export default function Profile() {
                       <div className="text-center">
                         <Image
                           className={style.pictureuser}
-                          src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${data.photo}`}
+                          src={data.photo_url}
                           alt="profile picture"
                           width={150}
                           height={150}

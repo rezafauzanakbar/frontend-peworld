@@ -232,13 +232,13 @@ export default function EditProfile() {
                             alt="profile picture"
                             width={150}
                             height={150}
-                            onChange={handleChange}
                           />
                         </label>
                         <input
                           className={style.input}
                           type="file"
                           id="addImage"
+                          onChange={handleChange}
                         />
                         <button
                           onClick={handleSubmit}

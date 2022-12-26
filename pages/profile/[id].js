@@ -94,18 +94,6 @@ export default function Detail(props) {
     getExperience();
   }, []);
 
-  // const getUserDetail = () => {
-  //   axios
-  //     .get(`${process.env.NEXT_PUBLIC_API_URL}/user/detail/${id}`)
-  //     .then((res) => {
-  //       console.log(res);
-  //       setUser(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
   const getDataLocal = () => {
     const data = JSON.parse(localStorage.getItem("data"));
     setLocal(data);

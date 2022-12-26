@@ -28,10 +28,12 @@ export default function NavbarPerekrut() {
               </div>
               <div className="col-auto">
                 <Link href={`/perekrut/profile/${local.id_perekrut}`}>
-                  <img
+                  <Image
                     className={style.navbarpictureuser}
                     src={`${process.env.NEXT_PUBLIC_API_URL}/foto user/${local.photo}`}
                     alt="profile picture"
+                    width={30}
+                    height={30}
                   />
                 </Link>
               </div>

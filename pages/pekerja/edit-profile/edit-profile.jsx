@@ -46,6 +46,7 @@ export default function EditProfile() {
     getUser(id);
   }, []);
 
+  const [preview, setPreview] = useState([]);
   const getUser = (id) => {
     axios
       .get(`${process.env.NEXT_PUBLIC_API_URL}/user/detail/${id}`)
@@ -188,6 +189,7 @@ export default function EditProfile() {
     const fileUploaded = event.target.files[0];
     document.getElementById("addImage").innerHTML = fileUploaded.name;
     setImage(fileUploaded);
+    setPreview([URL.createObjectURL(event.target.files[0])]);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -198,8 +200,16 @@ export default function EditProfile() {
     axios
       .put(`${process.env.NEXT_PUBLIC_API_URL}/user/photo/${id}`, inputForm)
       .then((res) => {
-        console.log(res.data);
-        return navigate("/profile");
+        swal({
+          title: "Update Photo",
+          text: "Update Successfully!",
+          icon: "success",
+          dangerMode: true,
+        }).then(async (confirm) => {
+          if (confirm) {
+            window.location.reload();
+          }
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -240,13 +250,13 @@ export default function EditProfile() {
                           id="addImage"
                           onChange={handleChange}
                         />
-                        <button
-                          onClick={handleSubmit}
-                          className="button-save mt-3"
-                        >
-                          Simpan Photo
-                        </button>
                       </div>
+                      <button
+                        onClick={handleSubmit}
+                        className={`mt-3 ${style.buttonsave}`}
+                      >
+                        Simpan Photo
+                      </button>
                       <div>
                         <h5 className="mt-3">{data.name}</h5>
                       </div>
@@ -495,30 +505,7 @@ export default function EditProfile() {
                     </div>
                   </form>
                 </div>
-                {/* <div className={style.containereditskill}>
-                  <div className={style.title}>
-                    <h5>Skill</h5>
-                    <hr />
-                  </div>
-                  <form action="">
-                    <div className="row">
-                      <div className="col-md-10">
-                        <div className="mb-3">
-                          <input
-                            type="text"
-                            className="input form-control"
-                            id=""
-                            aria-describedby
-                            placeholder="Java"
-                          />
-                        </div>
-                      </div>
-                      <div className="pt-1 col-md-2">
-                        <button className={style.buttonsave}>Simpan</button>
-                      </div>
-                    </div>
-                  </form>
-                </div> */}
+
                 <div className={style.containereditexperience}>
                   <div className={style.title}>
                     <h5>Pengalaman Kerja</h5>

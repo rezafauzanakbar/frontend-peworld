@@ -5,7 +5,7 @@ const nextConfig = {
   images: {
     domains: [
       "localhost",
-      "zany-gold-wombat-wear.cyclic.app/",
+      "zany-gold-wombat-wear.cyclic.app",
       "res.cloudinary.com",
     ],
   },

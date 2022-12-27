@@ -3,12 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: [
-      "localhost",
-      "lazy-blue-reindeer-robe.cyclic.app",
-      "res.cloudinary.com",
-      "colorful-crow-kilt.cyclic.app",
-    ],
+    domains: ["localhost", "handbag-duckling.cyclic.app", "res.cloudinary.com"],
   },
 };
 

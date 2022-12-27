@@ -5,7 +5,7 @@ const nextConfig = {
   images: {
     domains: [
       "localhost",
-      "dead-pear-elephant-tutu.cyclic.app/",
+      "dead-pear-elephant-tutu.cyclic.app",
       "res.cloudinary.com",
     ],
   },
